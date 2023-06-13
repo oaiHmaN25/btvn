@@ -1,0 +1,29 @@
+.info {
+  display: flex;
+  padding-top: 30px;
+  border: #f5fce3 solid 3px;
+  background-color: beige;
+}
+
+.header {
+  display: flexbox;
+}
+.header {
+  display: flex;
+  height: 50px;
+  align-items: center;
+}
+.header a {
+  color: #000000;
+  padding: 14px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+a {
+  border: #000000 solid 3px;
+}
+
+.address {
+  padding-left: 10px;
+  padding-right: 150px;
+}

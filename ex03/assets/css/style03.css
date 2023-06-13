@@ -1,0 +1,7 @@
+.form_manager {
+  display: flex;
+  margin-bottom: 10px;
+}
+.form_manager label {
+  width: 120px;
+}

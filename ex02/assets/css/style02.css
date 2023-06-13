@@ -1,0 +1,12 @@
+h1 {
+  text-align: center;
+}
+.felling > .cus_fell {
+  font-size: 20px;
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+.felling {
+  display: flex;
+}
