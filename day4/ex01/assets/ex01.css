@@ -1,0 +1,43 @@
+footer {
+  height: 200px;
+  width: 800px;
+  background-color: rgb(50, 51, 74);
+  border-radius: 5px;
+  color: white;
+}
+
+form {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.button {
+  background-color: yellow;
+  color: black;
+  border-color: yellow;
+  padding: 10px;
+  border-radius: 5px;
+}
+h1 {
+  padding-top: 15px;
+}
+b {
+  color: rgb(255, 179, 0);
+}
+.input_email {
+  padding: 10px;
+  width: 200px;
+  border-radius: 5px;
+}
+footer:hover .input_email::placeholder {
+  color: red;
+  background-color: #ddd;
+}
+footer:hover input {
+  background-color: #ddd;
+}
+footer:hover .button {
+  color: rgb(255, 255, 255);
+  background-color: rgb(255, 179, 0);
+  border-color: rgb(255, 179, 0);
+}

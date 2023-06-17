@@ -1,0 +1,48 @@
+button {
+  cursor: pointer;
+  height: 55px;
+  width: 89%;
+  border-radius: 5px;
+  border-color: rgb(88, 29, 29);
+  background-color: rgb(88, 29, 29);
+  color: white;
+  font-family: "Alfa Slab One", cursive;
+  font-size: 20px;
+}
+.form-input {
+  padding: 20px;
+  border: 1px;
+  width: 80%;
+  height: 10px;
+  border: 1px solid #000000;
+}
+.form-field {
+  position: relative;
+  font-family: "Noto Sans", sans-serif;
+  color: rgb(88, 29, 29);
+}
+.form-label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  left: 30px;
+}
+.form-input:focus + .form-label {
+  top: 3px;
+  padding: 10px;
+  display: inline-block;
+  background-color: white;
+}
+h2 {
+  margin-bottom: 10px;
+  padding-left: 270px;
+  font-size: 50px;
+  font-family: "Alfa Slab One", cursive;
+  color: rgb(88, 29, 29);
+}
+h1 {
+  padding-left: 360px;
+  color: rgb(88, 29, 29);
+  font-size: 30px;
+  font-family: "Noto Sans", sans-serif;
+}
