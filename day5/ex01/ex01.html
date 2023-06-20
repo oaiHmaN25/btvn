@@ -19,46 +19,53 @@
     />
   </head>
   <body>
-    <div class="content">
-      <h1>Hey there</h1>
-      <p>
-        <span>We'd like to hear from you.</span> Send us your message or just
-        say hy with our contact form or directly via phone, we love to chat.
-      </p>
-    </div>
-    <div class="container1">
-      <div id="tooltip">
-        <span id="tooltipText">Enter you name</span>
+    <form action="">
+      <div class="content">
+        <h1>Hey there</h1>
+        <p>
+          <span>We'd like to hear from you.</span> Send us your message or just
+          say hy with our contact form or directly via phone, we love to chat.
+        </p>
       </div>
-      <i class="fa fa-user-o"></i>
-      <input type="text" placeholder="Your Name" />
-    </div>
-    <div class="container">
-      <i class="fa fa-envelope-o"></i>
-      <input type="text" placeholder="your@domain.com" />
-    </div>
-    <div class="container3">
-      <i class="fa fa-mobile-phone"></i>
-      <input type="text" placeholder="+44 00 123" />
-    </div>
-    <div class="subject">
-      <i class="fa fa-book"></i>
-      <select name="subject" id="subject">
-        <option selected disabled>Subject</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
-    </div>
-    <div class="container-me">
-      <i class="fa fa-comment-o"></i>
-      <textarea
-        type="text"
-        name="message"
-        cols="30"
-        rows="10"
-        placeholder="Message"
-      ></textarea>
-    </div>
+      <div class="container1">
+        <div id="tooltip">
+          <span id="tooltipText">Enter you name</span>
+        </div>
+        <i class="fa fa-user-o"></i>
+        <input type="text" placeholder="Your Name" />
+      </div>
+      <div class="container">
+        <i class="fa fa-envelope-o"></i>
+        <input type="text" placeholder="your@domain.com" />
+      </div>
+      <div class="container3">
+        <i class="fa fa-mobile-phone"></i>
+        <input type="text" placeholder="+44 00 123" />
+      </div>
+      <div class="subject">
+        <i class="fa fa-book"></i>
+        <select name="subject" id="subject">
+          <option selected disabled>Subject</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+      </div>
+      <div class="container-me">
+        <i class="fa fa-comment-o"></i>
+        <textarea
+          type="text"
+          name="message"
+          cols="30"
+          rows="10"
+          placeholder="Message"
+        ></textarea>
+      </div>
+      <div class="footer">
+        <input type="checkbox" name="send" />
+        <label>Send me a copy of this message</label>
+        <button type="submit">SEND</button>
+      </div>
+    </form>
   </body>
 </html>
