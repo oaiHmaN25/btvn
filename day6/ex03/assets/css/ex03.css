@@ -50,3 +50,46 @@ body {
 .form-login .wrapper h2 {
   margin-top: 60px;
 }
+
+.form-login .wrapper span {
+  color: rgb(241, 84, 84);
+}
+
+.form-login .wrapper input {
+  padding: 7px 70px;
+  outline: 0;
+  margin-top: 15px;
+}
+.form-login .wrapper .row {
+  display: flex;
+  margin-left: 25px;
+}
+.form-login .wrapper .row input {
+  margin-left: 22px;
+  margin-bottom: 40px;
+}
+.form-login .wrapper .row p {
+  padding: 10px 5px;
+  margin-bottom: 40px;
+}
+
+.form-login .wrapper .row a {
+  text-decoration: none;
+  margin-top: 24px;
+  margin-left: 80px;
+}
+
+.form-login .wrapper .btn {
+  padding: 10px 130px;
+  background-color: rgb(241, 84, 84);
+  border: 0px;
+  color: white;
+}
+.form-login .wrapper .registor {
+  display: flex;
+  margin-left: 80px;
+}
+.form-login .wrapper .registor a {
+  margin-top: 15px;
+  text-decoration: none;
+}
