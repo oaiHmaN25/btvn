@@ -3,6 +3,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position-y: -240px;
+  font-family: "Nunito", sans-serif;
 }
 .form-login {
   min-height: 100vh;
@@ -76,7 +77,7 @@ body {
 .form-login .wrapper .row a {
   text-decoration: none;
   margin-top: 24px;
-  margin-left: 80px;
+  margin-left: 55px;
 }
 
 .form-login .wrapper .btn {
