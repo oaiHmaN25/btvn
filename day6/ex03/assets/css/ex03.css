@@ -1,0 +1,52 @@
+body {
+  background-image: url("../images/login-bg2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: -240px;
+}
+.form-login {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-login .log {
+  width: 300px;
+  height: 400px;
+  border: 1 solid white;
+  border-radius: 5px;
+  box-shadow: 0 5px 5px rgba(0.4, 0.4, 0.4, 0.4);
+  text-align: center;
+  color: white;
+  background-color: rgb(250, 98, 98);
+}
+.form-login .log h1 {
+  margin-top: 60px;
+}
+.form-login .log .btn {
+  padding: 8px 30px;
+  color: rgb(250, 98, 98);
+  background-color: white;
+  border-color: rgb(250, 98, 98);
+  border-radius: 4px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+.form-login .log i {
+  padding: 10px 10px;
+  color: white;
+  background-color: rgb(241, 84, 84);
+}
+.form-login .wrapper {
+  width: 400px;
+  height: 400px;
+  border: 1 solid white;
+  border-radius: 5px;
+  box-shadow: 0 5px 5px rgba(0.4, 0.4, 0.4, 0.4);
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+}
+.form-login .wrapper h2 {
+  margin-top: 60px;
+}
