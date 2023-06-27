@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Asap", sans-serif;
+}
+.content h2 {
+  margin: 20px 100px;
+}
+.content .header {
+  display: flex;
+  margin-left: 70px;
+}
+.content .header .container {
+  text-align: center;
+  background-color: rgb(214, 213, 210);
+  padding: 8px 20px;
+  margin-left: 25px;
+  border-radius: 30px;
+}
+.content .header .container:hover {
+  color: white;
+  background-color: rgb(155, 101, 1);
+}
+.content .header .container p {
+  font-size: 12px;
+}
+.content .header .container h3 {
+  font-size: 16px;
+}
+.content .info {
+  width: 80%;
+  display: flex;
+  /* position: relative; */
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 70px;
+}
+.content .info .info-detail img {
+  width: 400px;
+  height: 300px;
+  padding: 20px 20px;
+}
+.content .info .info-detail {
+  position: relative;
+}
+/* .content .info .info-detail:hover {
+ 
+} */
+.content .info .info-detail p {
+  position: absolute;
+  color: rgb(246, 246, 246);
+  bottom: 50px;
+  left: 40px;
+}
+.content .info .info-detail span {
+  font-size: 18px;
+  font-weight: 600;
+}
+.content .info .info-detail h4 {
+  position: absolute;
+  top: 50px;
+  left: 40px;
+  color: rgb(246, 246, 246);
+  font-size: 20px;
+  font-weight: 600;
+}
