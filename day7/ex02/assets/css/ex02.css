@@ -6,10 +6,12 @@
 }
 .header {
   background-image: url("../images/vingroup.jpg");
-  background-size: 100% 300px;
+  background-size: cover;
   background-repeat: no-repeat;
   height: 400px;
   width: 100%;
+  /* background-size: ; */
+  background-position: left center;
   position: relative;
 }
 .header .info {
@@ -19,7 +21,7 @@
   left: 50px;
 }
 .header .info img {
-  height: 150px;
+  height: auto;
   width: 250px;
 }
 .header .info .content {

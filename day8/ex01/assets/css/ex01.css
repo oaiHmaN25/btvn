@@ -1,0 +1,152 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image: url('../images/357485795_126793233778969_7937697518082272638_n.jpg');
+    background-size: cover;
+    font-family: 'Manrope', sans-serif;
+}
+.container {
+    max-width: 1400px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+}
+.container a img{
+    max-width: 100px;
+    height: auto;
+    
+}
+.header {
+    background-color: white;
+    position: relative;
+}
+.main-menu{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 540px;
+    
+}
+.container .main-menu li a.hover {
+    color: rgb(166, 165, 165);
+}
+.main-menu li a{
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 18px 20px;
+    margin-top: 10px;
+}
+.container::after{
+    content: '\f3ee';
+    font-family: 'Font Awesome 6 Brands';
+    font-size: 24px;
+    margin-top: 24px;
+    
+}
+.container .main-menu::after {
+    content: '\f05a';
+     font-family: 'Font Awesome 6 Free';
+     font-weight: 900;
+    font-size: 20px;
+   margin-top: 25px;
+   margin-left: 23px;
+
+}
+
+.container .main-menu  li a::after{
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 9px;
+        margin-left: 5px;
+}
+.container-menu {
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: -1px -1px 8px 0px rgba(129, 129, 129, 0.63);
+    width: 1400px;
+    position: absolute;
+    background-color: white;
+    left: 60px;
+}
+
+.content {
+    border: 1px solid rgb(194, 194, 194);
+    width: 500px;
+    border-bottom-color: white;
+    border-left: white;
+    border-top-color: white;
+}
+
+.container-menu .content h4 {
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.usage {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 212px;
+    height: 140px;
+
+}
+
+.usage p {
+    padding: 5px 62px;
+    /* height: 108px;
+        width: 167px; */
+    margin-top: 10px;
+}
+
+.styleguide {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 202px;
+    height: 190px;
+}
+
+.styleguide p {
+    padding: 5px 62px;
+    /* height: 108px;
+            width: 167px; */
+    margin-top: 10px;
+}
+
+.styleguide {
+    padding-bottom: 20px;
+}
+
+.container-menu {
+    display: flex;
+}
+
+.container-menu .element .navbar {
+    display: flex;
+    padding-bottom: 25px;
+}
+
+.container-menu .element .navbar p {
+    padding: 14px 4px 4px 35px;
+}
+
+.container-menu .element h4 {
+    height: 20px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.container-menu .element .navbar .divides {
+    margin: 0px 140px;
+}
