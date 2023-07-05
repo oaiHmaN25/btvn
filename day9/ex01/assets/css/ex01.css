@@ -1,0 +1,129 @@
+*{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+body{
+font-family: 'Inter', sans-serif;
+}
+h2{
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.container{
+    margin-top: 20px;
+    position: relative;
+}
+.container .content {
+    width: 300px;
+    height: auto;
+    text-align: right;
+    /* margin: 20px; */
+    position: relative;
+}
+.container .content span{
+    background-color: rgb(212, 212, 212);
+    color: rgb(61, 60, 60);
+    font-weight: 600;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+}
+.container .content h2{
+    margin: 10px ;
+    padding-right: 12px;
+}
+.container .content p{
+    line-height: 25px;
+    margin-bottom: 15px;
+   
+
+}
+.container .content:hover span{
+    color: white;
+    background-color: brown;
+    
+}
+.container .content .para{
+    border: 1px solid rgb(140, 151, 136);
+    border-bottom-color: white;
+    border-top-color: white;
+    border-left-color: white;
+    padding: 10px;
+    padding-bottom: 40px;
+    padding-right:20px;
+}
+.container .content:nth-child(4) .para{
+    border-right-color: white;
+}
+.container .content::after{
+    content: '\f111';
+    font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+    border: 2px solid rgb(177, 247, 149);
+    border-radius: 50%;
+    font-size: 8px;
+    padding: 4px 4px;
+    color: rgba(31, 146, 2, 0.959);
+    position: absolute;
+    top: 7px;
+    right: -10px;
+    box-shadow: rgba(14, 231, 105, 0.2) 0px 8px 24px;
+}
+.container .content:nth-child(1)::before {
+    content: '2012 - 2007';
+    position: absolute;
+    top: 7px;
+    right: -120px;
+}
+.container .content:nth-child(2)::before{
+    content: '2016 - 2012';
+    position: absolute;
+    top: 7px;
+    right: -120px;
+}
+.container .content:nth-child(3)::before{
+    content: '2018 - 2016';
+    position: absolute;
+    top: 7px;
+    right: -120px;
+}
+.container .content:nth-child(4)::before {
+    content: '2022 - 2018';
+    position: absolute;
+    top: 7px;
+    right: -120px;
+}
+.background{
+    position: absolute;
+    top: 10px;
+    right: 100px;
+}
+.background .img1{
+    position: absolute;
+    top: 100px;
+    left: -80px;
+}
+.background .img span{
+    top: 105px;
+    left: -73px;
+    position: absolute;
+    background-color: rgb(25, 25, 179);
+    color: rgb(25, 25, 179);
+    padding: 110px 60px;
+}
+.background .img p{
+    position: absolute;
+    z-index: 1;
+    color: rgb(255, 255, 255);
+   left: -30px;
+}
+.background .img h1 {
+    position: absolute;
+    z-index: 1;
+    color: transparent;
+    left: -30px;
+    top: 180px;
+    /* -webkit-text-stroke: 1px #fff; */
+}
