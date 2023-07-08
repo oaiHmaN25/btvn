@@ -1,0 +1,139 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    background-color: #323641;
+}
+.container{
+    margin: 200px auto;
+    position: relative;
+    border: 1px solid rgb(218, 75, 75);
+        background-color: rgb(218, 75, 75);
+        height: 200px;
+        width:  300px;
+        
+}
+.container span:nth-child(1){
+border-bottom: 200px solid rgb(184, 110, 110);
+    border-right: 300px solid transparent;
+    position: absolute;
+    left: -1px;
+    bottom: -1px;
+    z-index: 4;
+}
+.container span:nth-child(2) {
+    border-bottom: 200px solid rgb(177, 80, 80);
+    border-left: 301px solid transparent;
+    position: absolute;
+    right: -1px;
+    bottom: 0px;
+    z-index: 4;
+}
+.container span:nth-child(3){
+    border-right: 150px solid transparent;
+    border-left: 150px solid transparent;
+    border-top: 101px solid rgb(218, 75, 75);
+    position: absolute;
+    left: -1px;
+    top : -1px;
+    z-index: 3;
+}
+.container .content{
+    height: 100px;
+    width: 200px;
+    background-color: rgb(251, 251, 251);
+    position: absolute;
+    z-index: 1;
+    top:50px;
+    left:50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    
+    
+}
+.container .content .item{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-color: rgb(255, 25, 0);
+    z-index: 1;
+    transform: skew(-20deg);
+    color: rgb(255, 25, 0);
+}
+
+.container:hover{
+    animation: down 0.4s forwards;
+}
+.container:hover span:nth-child(3) {
+    
+    transform-origin: top center;
+    animation: fold 1s forwards;
+}
+.container:hover .content{
+    animation: up 1s forwards ;
+    z-index: 3;
+    animation-delay: 0.5s;
+}
+.shadow{  
+    margin: 0px auto;
+    padding: 10px 150px;
+    background: rgba(29, 26, 31, 0.43);
+    border-radius: 50%;
+    /* animation: shadow 0.4s infinite; */
+    display: inline-block;
+   
+}
+.container:hover + .shadow{
+    animation: shadow 0.4s forwards;
+}
+ @keyframes fold {
+
+     0%
+     {
+         transform: rotateX(0deg);
+     }
+
+     100% {
+         transform: rotateX(180deg);
+     }
+ }
+ @keyframes down {
+    0%{
+        transform: translate(0,0);
+    }
+    /* 50%{
+        transform: translate(0,20px);
+    } */
+    100%{
+        transform: translate(0,40px);
+    }
+ }
+ @keyframes up {
+     0% {
+         transform: translate(0, 0);
+         height: 100px;
+     }
+
+     /* 50% {
+         transform: translate(0, -20px);
+     } */
+
+     100% {
+         transform: translate(0, -200px);
+         height: 250px;
+     }
+ }
+ @keyframes shadow {
+    0%{
+        transform: scale(1,1);
+    }
+    100%{
+        transform: scale(0.5,1);
+    }
+ }

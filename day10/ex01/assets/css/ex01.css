@@ -1,0 +1,84 @@
+*{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+body{
+    background-color: rgb(0, 164, 246);
+    
+}
+.header{
+    position: relative;
+}
+.header .container {
+   
+    /* width: 10px;
+    height: auto; */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    left: 20px;
+}
+.header .container  span{
+    background-color: rgb(0, 164, 246);
+    height: 5px;
+    width: 30px;
+    margin: 3px;
+    /* border-radius: 2px; */
+    transition: transform 100ms linear;
+    
+
+}
+.header .content ul li {
+    margin-top: 20px;
+}
+.header  .content ul{
+    list-style: none;
+    margin-top: 20px;
+}
+.header  .content ul li a {
+    text-decoration: none;
+    color: rgb(0, 164, 246);
+    font-weight: 600;
+    font-size: 20px;
+    
+}
+
+.header .content{
+    position: absolute;
+    z-index: 0;
+    top: 100px;
+    left: 50px;
+
+}
+.header  .menu {
+    width: 200px;
+    height: 200px;
+   background-color: white;
+    position: absolute;
+    border-radius: 50%;
+    top: -100px;
+    left: -100px;
+    transition: transform 400ms linear;
+}
+.header .container:hover .line-1{
+transform: translate(-10%, 6px) rotate(135deg);
+width: 15px;    
+}
+.header .container:hover .line-2 {
+    transform: rotate(180deg);
+}
+.header .container:hover .line-3 {
+    transform: translate(-10%, -6px) rotate(45deg);
+width: 15px;
+ 
+}
+.header .container:hover + .menu{
+    transform: scale(15);
+}

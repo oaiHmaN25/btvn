@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shadow Animation</title>
+    <style>
+        .rectangle {
+            width: 200px;
+            height: 100px;
+            background-color: #f1f1f1;
+            position: relative;
+            animation: shadow-animation 2s infinite;
+        }
+
+        @keyframes shadow-animation {
+            0% {
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rectangle"></div>
+</body>
+
+</html>

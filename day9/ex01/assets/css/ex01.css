@@ -37,8 +37,6 @@ h2{
 .container .content p{
     line-height: 25px;
     margin-bottom: 15px;
-   
-
 }
 .container .content:hover span{
     color: white;
@@ -126,4 +124,9 @@ h2{
     left: -30px;
     top: 180px;
     /* -webkit-text-stroke: 1px #fff; */
+}
+.container .content:hover{
+    padding-left: 100px;
+        
+        
 }
