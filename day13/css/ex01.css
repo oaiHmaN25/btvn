@@ -1,0 +1,368 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Sofia Sans", sans-serif;
+}
+
+input, button, textarea, select {
+  font-family: inherit;
+  outline: none;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+@media screen and (max-width: 575px) {
+  .container {
+    padding: 0 10px;
+  }
+  .container .sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .container .sidebar .heading {
+    display: none;
+  }
+  .container .sidebar .nav p {
+    display: none;
+  }
+  .container .sidebar .nav img {
+    margin: 0 5px;
+  }
+  .container .sidebar .chat-btn {
+    display: none;
+  }
+  .container .header {
+    display: flex;
+    align-items: center;
+  }
+  .container .header .search-form {
+    display: flex;
+    align-items: center;
+  }
+  .container .header .nav {
+    display: none;
+  }
+  .container .header .actions {
+    margin-left: auto;
+  }
+  .container .main {
+    text-align: center;
+  }
+  .container .main img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+@media screen and (max-width: 991px) {
+  .container {
+    padding: 0 10px;
+  }
+  .container .sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .container .sidebar .heading {
+    display: none;
+  }
+  .container .sidebar .nav p {
+    display: none;
+  }
+  .container .sidebar .nav img {
+    margin: 0 5px;
+  }
+  .container .sidebar .chat-btn {
+    display: none;
+  }
+  .container .header {
+    display: flex;
+    align-items: center;
+  }
+  .container .header .search-form {
+    display: flex;
+    align-items: center;
+  }
+  .container .header .nav {
+    display: none;
+  }
+  .container .header .actions {
+    margin-left: auto;
+  }
+  .container .main {
+    text-align: center;
+  }
+  .container .main img {
+    width: 90%;
+    object-fit: cover;
+  }
+}
+@media screen and (min-width: 992px) {
+  .container .container {
+    position: relative;
+  }
+  .container .sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 54px 0 0 59px;
+  }
+  .container .sidebar .heading {
+    padding-top: 60px;
+    font-size: 3.1rem;
+    font-weight: 800;
+  }
+  .container .sidebar .nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 48px;
+  }
+  .container .sidebar .nav .nav-item {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+  .container .sidebar .nav .nav-item:hover {
+    transform: scale(1.05);
+  }
+  .container .sidebar .nav .icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+  .container .sidebar .chat-btn {
+    background: transparent;
+    position: sticky;
+    bottom: 60px;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    column-gap: 18px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .container .sidebar .chat-btn .icon {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: gray;
+  }
+  .container .header {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 128px;
+    display: flex;
+    align-items: center;
+  }
+  .container .header .search-form {
+    display: flex;
+    align-items: center;
+    column-gap: 18px;
+    margin-right: auto;
+  }
+  .container .header .nav {
+    display: flex;
+    column-gap: 46px;
+  }
+  .container .header .nav .nav-link {
+    font-size: 1.8rem;
+  }
+  .container .header .actions {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+    column-gap: 26px;
+  }
+  .container .main {
+    position: absolute;
+    right: -200px;
+    top: 150px;
+    width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(4, 1.2fr);
+    gap: 22px;
+    grid-auto-flow: dense;
+  }
+  .container .main img:hover {
+    transform: rotate(2deg);
+  }
+  .container .main .wide {
+    margin-bottom: 20px;
+  }
+  .container .main .tall img {
+    padding-right: 6px;
+  }
+  .container .search-form .search::placeholder {
+    font-weight: 600;
+    color: black;
+    opacity: 0.2;
+  }
+  .container .header .nav-link {
+    position: relative;
+    padding: 8px 0px;
+  }
+  .container .header .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: black;
+    transition: width 0.5s ease;
+  }
+  .container .header .nav-link:hover::after {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=ex01.css.map */

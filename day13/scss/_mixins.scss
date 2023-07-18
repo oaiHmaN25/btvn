@@ -1,0 +1,35 @@
+@mixin flexCenter {
+    display: flex;
+    align-items: center;   
+}
+@mixin girdContainer($column, $spacing) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -$spacing;
+    row-gap: $spacing;
+
+    >* {
+        margin-left: $spacing;
+        width: calc(100%/$column - $spacing);
+    }
+}
+@mixin screen($break-point) {
+    @if $break-point == mobile {
+        @media screen and (max-width:575px) {
+            @content;
+
+        }
+    }
+
+    @if $break-point == tablet {
+        @media screen and (max-width:991px) {
+            @content;
+        }
+    }
+
+    @if $break-point == pc {
+        @media screen and (min-width:992px) {
+            @content;
+        }
+    }
+}
