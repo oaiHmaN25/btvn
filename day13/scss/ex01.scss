@@ -39,6 +39,7 @@ a{
             .chat-btn{
                 display: none;
             }
+            
         }
         .header{
             @include flexCenter;
@@ -60,6 +61,38 @@ a{
                object-fit: cover;
             }
         }
+        .sidebar{
+            @include flexCenter;
+            justify-content: space-around;
+            .heading{
+                display: none;
+            }
+            .nav{
+                p{
+                    display: none;
+                }
+                img{
+                    margin: 0 5px;
+                }
+            }
+            .chat-btn{
+                display: none;
+            }
+            
+        }
+        .header{
+            @include flexCenter;
+            .search-form{
+                @include flexCenter;
+            }
+            .nav{
+                display: none;
+            }
+            .actions{
+                margin-left: auto;
+            }
+        }
+        
     }
     @include screen(tablet){
         padding: 0 10px;
