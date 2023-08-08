@@ -37,7 +37,7 @@ function insertNumber(array,number){
     return arrangeArray(array);
 }
 
-var numbers = [5, 1, 9, 8, 10,h,h];
+var numbers = [5, 1, 9, 8, 10];
 var element = 0;
 var newArray = insertNumber(numbers,element)
 
