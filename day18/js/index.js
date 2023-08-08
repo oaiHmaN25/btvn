@@ -4,7 +4,6 @@ function karaokeEffect(paragraph, index) {
                 var remainPara = paragraph.slice(index + 1).join(' ');
                 var karaokePara = partPara + " " + '<span class="highlight">' + paragraph[index] + '</span> ' + remainPara;
                 document.getElementById("karaokeParagraph").innerHTML = karaokePara;
-
                 index++;
                 setTimeout(() => {
                     karaokeEffect(paragraph, index);
