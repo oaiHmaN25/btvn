@@ -34,5 +34,5 @@ function checkArray(array){
     return true;
 }
 
-var array = [5, 10, 3, 8, 2, 0,11];
+var array = [5.7, 10, 3, 8, 2, 0,11.1];
 findMinMax(array);
