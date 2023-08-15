@@ -1,33 +1,3 @@
-// Object.prototype.createCustomers = function() {
-//     var Customer = function(name, age, address) {
-//         var current = this;
-//         // Định nghĩa các thuộc tính
-//         current.name = name;
-//         current.age = age;
-//         current.address = address;
-//     };
-
-   
-//     var customerInstances = this.map(function(customer) {
-//         return new Customer(customer.name, customer.age, customer.address);
-//     });
-//     customerInstances.sort(function(a, b) {
-//         return a.age - b.age;
-//     });
-
-//     return customerInstances;
-// };
-
-
-// const customers = [
-//     { name: "Nguyễn Văn A", age: 11, address: "Ha Noi" },
-//     { name: "Nguyễn Văn B", age: 2, address: "Hai Phong" },
-//     { name: "Nguyễn Văn C", age: 12, address: "TP.HCM" },
-// ];
-
-
-// const result = customers.createCustomers();
-// console.log(result);
 var createCustomers = function(customerData) {
     var customerResult = customerData.map(function(customer) {
         var shortName = getShortName(customer.name);
@@ -39,7 +9,7 @@ var createCustomers = function(customerData) {
         };
     });
 
-    // Sort the customerInstances array by age
+
     customerResult.sort(function(a, b) {
         return a.age - b.age;
     });

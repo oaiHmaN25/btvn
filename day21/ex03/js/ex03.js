@@ -13,7 +13,7 @@ function handleRegister(name, password,email,role) {
         console.log("Lỗi thêm người dùng");
         return null;
     }
-     if (name === undefined || password === undefined || email === undefined) {
+    if (name === undefined || password === undefined || email === undefined) {
         console.log("Lỗi thêm người dùng");
         return null;
     }
