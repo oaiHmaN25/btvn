@@ -34,17 +34,31 @@ btnLogin.addEventListener("click",function(){
 //   var res = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 //   return res.test(String(email).toLowerCase());
 // }
+  function ValidateEmail(email) {
+  // Sử dụng biểu thức chính quy để kiểm tra tính hợp lệ của email
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+}
 
 var form = document.querySelectorAll(".form-group");
-var fullname =  document.getElementById("fullname");
+var fullname = document.getElementById("fullname");
 var email = document.getElementById("email");
 var password = document.getElementById("password");
-var success = document.querySelector(".form-message")
+var success = document.querySelector(".form-message");
 
-form.addEventListener("click", function () {
-  if(fullname === "" || email.value === '' || password.value === '' ){
-      form.classList.add("error");
-  } 
- 
-}
-)
+login.addEventListener("click", function () {
+  // Xóa lớp CSS "error" và "success" khỏi các phần tử liên quan
+ form.forEach(function(form) {
+    form.classList.add("error");
+  });
+  if (email.value === "" ) {
+    form.classList.add("error");
+  } else if (!ValidateEmail(email.value)){
+
+  } else{
+    success.classList.add("success");
+    form.classList.remove("error");
+  }
+  if (password.value === "") {
+    form.classList.add("error");
+  }
+});
