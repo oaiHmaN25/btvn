@@ -13,7 +13,7 @@ function getSum(...args){
     return sum;
 }
 
-console.log(getSum(5,10,10));
+console.log(getSum(5,10,"10"));
 
 //Bài 2 : Viết 1 phương thức Prototype có tên là getCurrency có đối số truyền vào là đơn vị tiền tệ cần hiển thị
 Number.prototype.getCurrency = function(currency) {
