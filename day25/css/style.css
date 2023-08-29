@@ -1,0 +1,93 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.carousel {
+    position: relative;
+}
+
+/* .carousel .carousel-inner .item:not(.active){
+    display: none;
+} */
+
+.carousel .carousel-inner {
+    display: flex;
+    /* width: 5760px; */
+    transition: translate 0.4s ease;
+}
+
+/* .carousel .carousel-inner .item{
+    width: 1920px;
+} */
+.carousel .carousel-nav span {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    height: 40px;
+    width: 40px;
+    background-color: aqua;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.carousel .carousel-nav span.prev {
+    left: 10px;
+}
+
+.carousel .carousel-nav span.next {
+    right: 10px;
+}
+
+ul {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%);
+    list-style: none;
+    display: flex;
+}
+
+ul li {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid black;
+    margin: 10px;
+    background-color: white;
+    cursor: pointer;
+}
+
+ul li.selected {
+    background-color: rgb(30, 209, 84);
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: gray;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: black;
+}
