@@ -51,7 +51,7 @@ if(carouselItems.length) {
         }
     })
     
-}
+
 
 
 var dotsContainer = document.querySelector('.dots');
@@ -78,8 +78,10 @@ function goToSlide(index) {
   if (index >= 0 && index < carouselItems.length) {
     carouselItems[currentSlide].classList.remove('active');
     currentSlide = index;
+    position = -index * itemWidth;
     carouselItems[currentSlide].classList.add('active');
     carouselInner.style.translate = `${position}px`;
     updateDots();
   }
+}
 }
