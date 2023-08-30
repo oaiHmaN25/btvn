@@ -8,16 +8,37 @@
     <title>Navigation Dots Slide</title>
 </head>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/ex12.css">
+</head>
+
 <body>
-    <div class="slider-container">
-        <div class="slides">
-            <div class="slide">Slide 1</div>
-            <div class="slide">Slide 2</div>
-            <div class="slide">Slide 3</div>
-            <!-- Add more slides as needed -->
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="https://picsum.photos/1920/500" alt="">
+            </div>
+            <div class="item">
+                <img src="https://picsum.photos/1920/500" alt="">
+            </div>
+            <div class="item">
+                <img src="https://picsum.photos/1920/500" alt="">
+            </div>
         </div>
-        <div class="dots"></div>
+        <div class="carousel-nav">
+            <span class="prev">&lt;</span>
+            <span class="next">&gt;</span>
+        </div>
+        <div class="dots">
+        </div>
     </div>
+
     <script src="js/script.js"></script>
 </body>
 
