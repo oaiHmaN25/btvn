@@ -132,19 +132,48 @@ progressBar.addEventListener("click", function(e){
 
 // })
 var timer = document.querySelector(".timer");
-progressBar.addEventListener("mouseover", function(e){
-    var offsetX = e.offsetX;
-    // console.log(progressBarWidth);
-    // console.log(offsetX);
-    var currentTime = (offsetX / progressBarWidth) * audio.duration;
-    var rate =  getTime(currentTime);
-    timer.textContent = rate;
-    timer.style.display = "block";
-    timer.style.left = (e.pageX - 100) + 'px';
-    timer.style.top = (e.pageY - 130) + 'px';
-    // console.log(currentTime);
-    // console.log(rate);
-})
-progressBar.addEventListener('mouseout', () => {
-    timer.style.display = "none"
+// progressBar.addEventListener("mouseover", function(e){
+//     var offsetX = e.offsetX;
+//     // console.log(progressBarWidth);
+//     // console.log(offsetX);
+//     var currentTime = (offsetX / progressBarWidth) * audio.duration;
+//     var rate =  getTime(currentTime);
+//     timer.textContent = rate;
+//     timer.style.display = "block";
+//     timer.style.left = (e.clientX - 100) + 'px';
+//     timer.style.top = (e.clientY - 130) + 'px';
+//     // console.log(currentTime);
+//     // console.log(rate);
+// })
+// progressBar.addEventListener('mouseout', () => {
+//     timer.style.display = "none"
+// });
+let isTrackingMouse = false;
+
+// Lắng nghe sự kiện mousemove trên thanh tiến trình
+progressBar.addEventListener('mousemove', function (e) {
+    if (isTrackingMouse) {
+    
+        var offsetX = e.offsetX;
+        var currentTime = (offsetX / progressBarWidth) * audio.duration;
+        var rate =  getTime(currentTime);
+        timer.textContent = rate;
+        timer.style.display = "block";
+        timer.style.left = (e.clientX - 100) + 'px';
+        timer.style.top = (e.clientY - 130) + 'px';
+
+        // Cập nhật thời gian hiện tại của tệp âm thanh
+        // audio.currentTime = newTime;
+    }
+});
+
+// Lắng nghe sự kiện mouseover để bắt đầu theo dõi chuột
+progressBar.addEventListener('mouseover', function () {
+    isTrackingMouse = true;
+});
+
+// Lắng nghe sự kiện mouseout để dừng theo dõi chuột
+progressBar.addEventListener('mouseout', function () {
+    isTrackingMouse = false;
+    timer.style.display ="none"
 });
