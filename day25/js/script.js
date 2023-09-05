@@ -85,3 +85,27 @@ function goToSlide(index) {
   }
 }
 }
+
+
+//Vuot chuyen slide
+
+var isDrag = false;
+var intitialOffsetX;
+
+carouselInner.addEventListener("mousedown", function(e){
+  isDrag = true;
+  intitialOffsetX = e.offsetX;
+  console.log(intitialOffsetX);
+});
+
+carouselInner.addEventListener("mousemove", function(e){
+  e.preventDefault();
+  if(isDrag = true){
+    var currentOffsetX = intitialOffsetX;
+    var moveWidth = currentOffsetX - intitialOffsetX;
+    console.log(moveWidth);
+  }
+})
+carouselInner.addEventListener("mouseup", function(){
+  isDrag = false;
+})
