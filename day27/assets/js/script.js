@@ -30,7 +30,7 @@ var listPro = document.querySelector(".list");
 var table = document.querySelector(".tablelist tbody"); 
 var listCards = [];
 var text = document.querySelector("p.text");
-
+var tableCart = document.querySelector(".tablecart tbody");
 
 function listProduct() {
     products.forEach((value, key) => {
@@ -49,7 +49,7 @@ function listProduct() {
 }
 
 listProduct();
-var tableCart = document.querySelector(".tablecart tbody");
+
 function addToCard(key){
     // tableCart.style.display = "block";
     // console.log(`ok`);
@@ -63,10 +63,37 @@ function addToCard(key){
     }
     reloadCard();
 }
+//     var count = 0;
+//     // var price = 0;
+//     var totalPrice = 0;
+//     listCards.forEach((value, key)=>{
+//         // totalPrice = totalPrice + value.price;
+//         // console.log(key);
+//         const pricePro = value.price * value.quantity;
+//         count += value.quantity;
+//         totalPrice += pricePro;
+//         console.log(value.price);
+//         console.log(value.quantity);
+//         console.log(count);
+//         console.log(totalPrice);
+//         var tableRow = document.createElement("tr"); 
+//         tableRow.innerHTML = `
+//             <td>${value.stt}</td>
+//             <td>${value.name}</td>
+//             <td>${value.price}</td>
+//             <td> <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
+//                     ${value.quantity}
+//                     <button onclick="changeQuantity(${key}, ${value.quantity + 1})">+</button></td>
+//             <td>${pricePro}</td>
+//             <td><button onclick="deleteButton()">Xóa</button></td>`;
+            
+//         tableCart.appendChild(tableRow); 
+//     })
+// }
 
-// var tableCart1 = document.querySelector(".tablecart");
-// console.log(tableCart1);
-console.log(tableCart);
+// // var tableCart1 = document.querySelector(".tablecart");
+// // console.log(tableCart1);
+// console.log(tableCart);
 function reloadCard(){
     tableCart.innerHTML = "";
     var count = 0;
