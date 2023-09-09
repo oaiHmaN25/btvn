@@ -2,7 +2,7 @@ var progressBar = document.querySelector(".progress-bar");
 
 var progress = progressBar.querySelector(".progress");
 
-var progressDot = document.querySelector("span");
+var progressDot = progress.querySelector("span");
 
 var progressBarWidth = progressBar.clientWidth;
 
@@ -12,7 +12,7 @@ var initalRate = 0;
 var rate = 0;
 
 var handleChange = function (value) {
-  console.log(value);
+//   console.log(value);
 };
 
 progressBar.addEventListener("mousedown", function (e) {
@@ -30,7 +30,7 @@ progressBar.addEventListener("mousedown", function (e) {
   initialClientX = e.clientX;
 
   //   console.log("progress bar");
-
+  
   handleChange(rate);
 });
 
@@ -48,9 +48,10 @@ document.addEventListener("mousemove", function (e) {
     // console.log(space);
     rate = (space * 100) / progressBarWidth + initalRate;
     if (rate >= 0 && rate <= 100) {
-      progress.style.width = `${rate}%`;
-      handleChange(rate);
+        rate = 100;
     }
+    progress.style.width = `${rate}%`;
+      handleChange(rate);
   }
 });
 
@@ -91,8 +92,12 @@ audio.addEventListener("loadeddata", function () {
 
 //End nhạc replay
 audio.addEventListener("ended", function(){
-    // audio.currentTime = 0;
-    audio.play();
+    audio.currentTime = 0;
+    rate = 0;
+    currentTime = 0;
+    // audio.play();
+    progress.style.width = 0;
+    playBtn = pauseIcon;
 })
 audio.loop = true;
 playBtn.addEventListener("click", function () {
@@ -110,7 +115,7 @@ audio.addEventListener("timeupdate", function () {
   currentTimeEl.innerText = getTime(this.currentTime);
 
   //Tính tỷ lệ phần trăm
-  var rate = (this.currentTime / this.duration) * 100;
+    rate = (this.currentTime / this.duration) * 100;
 
   //Update vào timer
   progress.style.width = `${rate}%`;
@@ -121,39 +126,20 @@ progressBar.addEventListener("click", function(e){
     var clickOffSetX = e.offsetX;
     var songDuration = audio.duration;
     audio.currentTime = (clickOffSetX/progressBarwithval) * songDuration;
-    audio.play();
+    // audio.play();
 })
 
-// progressBar.addEventListener("click", function(){
-    
-// 	slider_position = audio.duration * (audio.value / 100);
-// 	audio.currentTime = slider_position;
-
-
-// })
+progressBar.addEventListener("click", function(){
+	slider_position = audio.duration * (audio.value / 100);
+	
+    console.log(`sil: ${slider_position}`  );
+})
 var timer = document.querySelector(".timer");
-// progressBar.addEventListener("mouseover", function(e){
-//     var offsetX = e.offsetX;
-//     // console.log(progressBarWidth);
-//     // console.log(offsetX);
-//     var currentTime = (offsetX / progressBarWidth) * audio.duration;
-//     var rate =  getTime(currentTime);
-//     timer.textContent = rate;
-//     timer.style.display = "block";
-//     timer.style.left = (e.clientX - 100) + 'px';
-//     timer.style.top = (e.clientY - 130) + 'px';
-//     // console.log(currentTime);
-//     // console.log(rate);
-// })
-// progressBar.addEventListener('mouseout', () => {
-//     timer.style.display = "none"
-// });
-let isTrackingMouse = false;
+var isTrackingMouse = false;
 
-// Lắng nghe sự kiện mousemove trên thanh tiến trình
+
 progressBar.addEventListener('mousemove', function (e) {
     if (isTrackingMouse) {
-    
         var offsetX = e.offsetX;
         var currentTime = (offsetX / progressBarWidth) * audio.duration;
         var rate =  getTime(currentTime);
@@ -161,19 +147,18 @@ progressBar.addEventListener('mousemove', function (e) {
         timer.style.display = "block";
         timer.style.left = (e.clientX - 100) + 'px';
         timer.style.top = (e.clientY - 130) + 'px';
-
-        // Cập nhật thời gian hiện tại của tệp âm thanh
-        // audio.currentTime = newTime;
     }
 });
 
-// Lắng nghe sự kiện mouseover để bắt đầu theo dõi chuột
 progressBar.addEventListener('mouseover', function () {
     isTrackingMouse = true;
 });
 
-// Lắng nghe sự kiện mouseout để dừng theo dõi chuột
 progressBar.addEventListener('mouseout', function () {
     isTrackingMouse = false;
     timer.style.display ="none"
 });
+window.addEventListener("load", function(){
+    var title = this.document.querySelector(".title");
+    console.log(title);
+})
