@@ -1,0 +1,141 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: 0;
+}
+body{
+    position: relative;
+    height: 100%;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.player {
+    display: flex;
+}
+
+.play-btn {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.progress-bar {
+    width: 100%;
+    position: relative;
+    height: 20px;
+    background: gray;
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.progress-bar:hover {
+    background: greenyellow;
+}
+
+.progress-bar .progress {
+    position: absolute;
+    background: red;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.progress-bar .progress span {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    bottom: 0;
+    width: 25px;
+    height: 25px;
+    display: block;
+    border-radius: 50%;
+    background: blueviolet;
+    translate: 50% -50%;
+}
+
+.progress-bar .time-preview {
+    position: absolute;
+    top: 0;
+    translate: -50% -110%;
+    background: black;
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 2px 5px;
+    display: none;
+}
+
+.progress-bar .time-preview.show {
+    display: block;
+}
+/* .karaoke{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.btnkaraoke{
+    padding: 10px;
+    margin-top: 20px ;
+    cursor: pointer;
+}
+.karaoketext{
+    display: none;
+    background-color: violet;    
+    position: absolute;
+    width: 1900px;
+    height: 1000px;
+    /* transition: transform 0.3s ease; */
+    
+/* }
+.close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 100;
+    top: 0;
+    display: none;
+} */ 
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnkaraoke {
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.karaoke  {
+    margin-top: 20px;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: blueviolet;
+    position: absolute ;
+    
+}
+.close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 100;
+    display: none;
+}
+
+.karaoketext{
+    margin-top: 30px;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+}
