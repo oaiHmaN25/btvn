@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    max-width: 100%;
+    display: flex;
+        justify-content: center;
+        align-items: center;
+    /* Set the width of the container */
+}
+
+.listhead {
+    display: inline-block;
+    border: 15px solid #4286F4;
+    /* padding: 10px; */
+}
+
+p.draggable-item {
+    display: block;
+    border: 1px solid #080a0e;
+    padding: 15px 30px;
+    background-color:#8BB3F4 ;
+    margin: 1px;
+}
+
+p.draggable-module{
+    display: block;
+    border: 1px solid #080a0e;
+    padding: 15px 30px;
+    background-color: #FF6F00;
+    margin: 1px;
+}
+p.draggable-module.hover {
+    opacity: 0.8;
+    /* background-color: #ff6f00a4; */
+    background-color: #FF6F00;
+}
+p.draggable-item.active{
+    opacity: 0.8;
+    background-color: #8BB3F4
+}

@@ -74,68 +74,64 @@ body{
 .progress-bar .time-preview.show {
     display: block;
 }
-/* .karaoke{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-.btnkaraoke{
-    padding: 10px;
-    margin-top: 20px ;
-    cursor: pointer;
-}
-.karaoketext{
-    display: none;
-    background-color: violet;    
-    position: absolute;
-    width: 1900px;
-    height: 1000px;
-    /* transition: transform 0.3s ease; */
-    
-/* }
-.close-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 100;
-    top: 0;
-    display: none;
-} */ 
-.button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
+
 .btnkaraoke {
     padding: 10px;
     margin-top: 20px;
     cursor: pointer;
+    display: block;
+    margin: 10px auto;
 }
-.karaoke  {
-    margin-top: 20px;
-    display: none;
-    width: 100%;
-    height: 100%;
-    background-color: blueviolet;
-    position: absolute ;
-    
-}
-.close-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
+.karaoke .karaoke-inner{
+    position: fixed;
+    inset: 0;
+    top: 100%;
     z-index: 100;
-    display: none;
+    background-color: blueviolet;
+    color: white;
+    transition: top 0.4s ease;
+    padding: 15px;
 }
 
-.karaoketext{
-    margin-top: 30px;
-    text-align: center;
-    font-size: 40px;
-    color: white;
+.karaoke .karaoke-inner.show{
+    top: 0;
+}
+.karaoke .karaoke-container{
+    max-width: 90%;
+    margin: 0 auto;
+}
+.karaoke .karaoke-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.karaoke .karaoke-content{
+    font-size: 3vw;
+    font-weight: bold;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* line-height: 1.5; */
+}
+.karaoke .close {
+    cursor: pointer;
+}
+
+.karaoke .karaoke-container .word{
+    position: relative;
+    margin: 0 5px;
+    /* margin-top: 40px; */
+}
+.karaoke .karaoke-container .word span{
+    position: absolute;
+    top: 0;left: 0;
+    bottom: 0;
+    width: 0;
+    /* right: 0; */
+    overflow: hidden;
+    display: inline-block;
+    color: blue;
 }

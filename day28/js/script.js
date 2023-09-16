@@ -130,6 +130,7 @@ audio.addEventListener("timeupdate", function () {
     handleUpdateValue(value);
     
   }
+  handleKaraoke(audio.currentTime);
   
 });
 
@@ -162,21 +163,21 @@ audio.addEventListener("play", function () {
 audio.addEventListener("pause", function () {
   playBtn.innerHTML = playBtnIcon;
 });
-var closeIcon = document.querySelector(".close-icon");
-var karaoke= document.querySelector(".karaoke")
-var btnKaraoke = document.querySelector(".btnkaraoke");
-btnKaraoke.addEventListener("click", function(){
-    console.log(`ok`);
-    // karaoketext.style.transform = `translate(${newX}px, ${newY}px)`;
-    karaoke.style.display = "block"
-    closeIcon.style.display = "block"
-    // getSentence();
-})
-closeIcon.addEventListener("click", function(){
-    console.log(`ok`);
-    karaoke.style.display = "none"
+// var closeIcon = document.querySelector(".close-icon");
+// var karaoke= document.querySelector(".karaoke")
+// var btnKaraoke = document.querySelector(".btnkaraoke");
+// btnKaraoke.addEventListener("click", function(){
+//     console.log(`ok`);
+//     // karaoketext.style.transform = `translate(${newX}px, ${newY}px)`;
+//     karaoke.style.display = "block"
+//     closeIcon.style.display = "block"
+//     // getSentence();
+// })
+// closeIcon.addEventListener("click", function(){
+//     console.log(`ok`);
+//     karaoke.style.display = "none"
 
-})
+// })
 var lyric = `{
     "err": 0,
     "msg": "Success",
@@ -2845,52 +2846,101 @@ var lyric = `{
 
 var karaokeText = document.querySelector(".karaoketext");
 var lyricjson = JSON.parse(lyric).data.sentences;
-// console.log(lyricjson[0].words.startTime);
-// var startTimes = [];
-// var endTimes = [];
+// 
+        // console.log(lyricjson[1]);
+        // console.log(lyricjson[2]);
+        // console.log(lyricjson[3]);
 
-// for (var i = 0; i < lyricjson.length; i++) {
-//     var sentence = lyricjson[i].words;
-//     for (var j = 0; j < sentence.length; j++) {
-//         var word = sentence[j];
-//         startTimes.push(word.startTime);
-//         endTimes.push(word.endTime);
-//     }
-// }
-// console.log("Start Times:", startTimes);
-// console.log("End Times:", endTimes);
-// // console.log(lyricjson);
-function millisecondsToSeconds(milliseconds) {
-  return milliseconds / 1000;
+var songInfo = `<h3>Ngày mai người ta lấy chồng</h3>
+                <p>Ca sỹ : Thành Đạt</p>`
+
+
+
+//Xay dung tinh nag karaoke 
+var karaoke = document.querySelector(".karaoke");
+var karaokePlayBtn = document.querySelector(".btnkaraoke");
+var karaokeInner = document.querySelector(".karaoke-inner");
+var closeBtn = document.querySelector(".close");
+var karaokeContent = document.querySelector(".karaoke-content");
+
+
+
+karaokePlayBtn.addEventListener("click", function(){
+    karaokeInner.classList.add("show");
+    karaokeContent.innerHTML = songInfo;
+})
+
+closeBtn.addEventListener("click", function(){
+    karaokeInner.classList.remove("show");
+    karaokeContent.innerHTML = "";
+})
+
+
+var handleKaraoke = function(currentTime){
+    currentTime *= 1000;
+    var index = lyricjson.findIndex(function (wordItem) {
+        // console.log(wordItem);
+        var wordItemArray = wordItem.words;
+        // console.log(wordItemArray);S
+        return (currentTime >= wordItemArray[0].startTime &&
+             currentTime <= wordItemArray[wordItemArray.length - 1].endTime);
+    });
+    if(index !== -1){
+        //Vòng lặp các câu trong 1 màn hình 
+        /*
+        Page  = 1 => index = 0 đến 1 
+        Page  = 2 => index = 1 đến 2 
+        Page  = 3 => index = 2 đến 3
+        index = (page - 1) * 2 
+        Công thức : page = index / 2 + 1
+        */
+        var number = 2;
+
+       var page = Math.floor(index/number+1);
+       var offSet = (page-1)*number;
+       if(index >= offSet && index < offSet + number){    
+            karaokeContent.innerHTML = "";
+            var div = document.createElement("div");
+            for(var i = offSet; i< offSet + number; i++){
+                 var p = document.createElement("p");
+
+        // console.log(lyricjson[index].words);
+        //Vòng lặp các từ trong 1 câu 
+        lyricjson[i].words.forEach(function (word){
+        var wordEl = document.createElement("span");
+            wordEl.classList.add("word");
+            wordEl.innerHTML = word.data ;
+        var span = document.createElement("span");
+        span.innerText = word.data;
+        wordEl.append(span);
+        // console.log(wordEl);
+        p.append(wordEl);
+        // console.log(lyricjson[i].words.data);
+        // console.log(p);
+         if(currentTime >= word.startTime){
+            span.style.width = `100%`;
+            console.log(word);
+            if(currentTime >= word.startTime && currentTime <= word.endTime){
+                // console.log(word.data);
+                var wordTime = word.endTime - word.startTime;
+                console.log(wordTime);
+                var start = currentTime - word.startTime;
+                var rate = (start*100)/wordTime;
+                // console.log(word.data, rate);
+            }
+        }
+        })
+        karaokeContent.append(p);
+        if(p.previousElementSibling !== null){
+            p.previousElementSibling.remove();
+        }
+        div.append(p);
+       
+       }    
+            }
+           
+        karaokeContent.append(div);
+    }
+    // console.log(currentTime);
+
 }
-var lyricDisplay = document.createElement("p");
-karaokeText.appendChild(lyricDisplay);
-
-// Hàm để hiển thị lời bài hát tương ứng với thời điểm audio
-function displayLyrics(lyricData, audioElement) {
-  var currentTime = audioElement.currentTime;
-    var matchingSentences = lyricjson.filter(function (sentence) {
-    var startTime = millisecondsToSeconds(sentence.words[0].startTime);
-
-    var endTime = millisecondsToSeconds(sentence.words[sentence.words.length - 1].endTime);
-    
-    return currentTime >= startTime && currentTime <= endTime;
-  });
-  if (matchingSentences.length > 0) {
-    // Tạo HTML để hiển thị từng từ của câu lời
-    var matchingSentence = matchingSentences[matchingSentences.length - 1];
-    var html = matchingSentence.words.map(function (word) {
-      return `<span>${word.data}</span>`;
-    }).join(' '); // Kết hợp các từ lại với nhau
-    lyricDisplay.innerHTML = html;
-  } else {
-    lyricDisplay.innerHTML = `Ai Chung Tình Được Mãi <br> <span class="singer-name">Đinh Tùng Huy, ACV</span>`;
-  }
-}
-
-// Gọi hàm hiển thị lời bài hát với dữ liệu lyric khi audio đang chạy
-var audioElement = document.querySelector("audio"); // Thay thế bằng selector của audio thực tế
-audioElement.addEventListener("timeupdate", function () {
-  displayLyrics(lyric, audioElement);
-});
-// console.log(audio.currentTime);
