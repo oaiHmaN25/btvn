@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <h1>Doc Editor</h1>
+    <hr>
+    <div class="container">
+        <div class="save">
+            <select name="" id="">
+                <option value="0">File</option>
+                <option value="1">New</option>
+                <option value="2">Save as TXT</option>
+                <option value="3">Save as PDF</option>
+            </select>
+            <input type="text" value="untitled">
+        </div>
+        <div class="font-style">
+            <button id="bold"><i class="fa-solid fa-b"></i></button>
+            <button id="underline"><i class="fa-solid fa-underline"></i></button>
+            <button id="italic"><i class="fa-solid fa-italic"></i></button>
+            <input type="color" id = "foreColor" class="font-color">
+
+        </div>
+    </div>
+    <div class="textarea" contenteditable="true">
+    
+    </div>
+   <div class="count">
+        <p class="char">Số kí tự : 0</p>
+        <p class="word">Số từ : 0</p>
+   </div>
+    
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

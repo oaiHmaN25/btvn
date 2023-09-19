@@ -44,6 +44,8 @@ listModule.forEach((value, indexModule) => {
          var moduleItems = document.querySelectorAll(".draggable-module");
         moduleItems.forEach((item, itemIndex) => {
             item.innerHTML = `Module ${itemIndex + 1}: ${item.innerText.split(": ")[1]}`;
+            console.log(`${item.innerText.split(": ")[1]}`);
+            console.log(`${item[1]}`);
             this.classList.remove("hover")
         });
         
