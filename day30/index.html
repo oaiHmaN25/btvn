@@ -6,19 +6,23 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 <body>
     <h1>Doc Editor</h1>
     <hr>
     <div class="container">
         <div class="save">
-            <select name="" id="">
-                <option value="0">File</option>
-                <option value="1">New</option>
-                <option value="2">Save as TXT</option>
-                <option value="3">Save as PDF</option>
-            </select>
-            <input type="text" value="untitled">
+            <div class="dropdown">
+                <button class="dropbtn">File</button>
+                <div class="dropdown-content">
+                    <button class="new-text">New</button>
+                    <button class="txt">TXT</button>
+                    <button class="pdf">PDF</button>
+                </div>
+            </div>
+            
+            <input type="text" value="untitled" class="filename">
         </div>
         <div class="font-style">
             <button id="bold"><i class="fa-solid fa-b"></i></button>
@@ -35,7 +39,9 @@
         <p class="char">Số kí tự : 0</p>
         <p class="word">Số từ : 0</p>
    </div>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"
+        integrity="sha512-w3u9q/DeneCSwUDjhiMNibTRh/1i/gScBVp2imNVAMCt6cUHIw6xzhzcPFIaL3Q1EbI2l+nu17q2aLJJLo4ZYg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
