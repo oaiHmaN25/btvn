@@ -1,26 +1,29 @@
-
-// var checkCtrl = false;
-
-// $(document).keydown(function(e) {
-//     if (e.keyCode === 17) {
-//         checkCtrl = true;
-//     }
-// }).keyup(function(e) {
-//     if (e.keyCode === 17) {
-//         checkCtrl = false;
-//     }
-// }).keydown(function(e) {
-//     if (checkCtrl && e.keyCode === 85) {
-//         // Prevent Ctrl+U
-//         e.preventDefault();
-//         return false;
-//     }
-// });
+var checkCtrl = false;
 var button = document.querySelector("button");
 var time = 20;
 var timerDisplay = document.querySelector(".timer");
 var value = false;  // Start with the countdown paused
 var animation;
+
+document.addEventListener("keydown", function(e) {
+    if (e.keyCode === 17) {
+        checkCtrl = true;
+    }
+});
+
+document.addEventListener("keyup", function(e) {
+    if (e.keyCode === 17) {
+        checkCtrl = false;
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (checkCtrl && e.keyCode === 85) {
+        // Prevent Ctrl+U
+        e.preventDefault();
+        return false;
+    }
+});
 
 button.addEventListener("click", function(){
     console.log(`ok`);
@@ -58,9 +61,9 @@ function countTime() {
 
 document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
-        cancelAnimationFrame(animation);  // Stop the countdown when not visible
+        cancelAnimationFrame(animation);  
     } else if (document.visibilityState === "visible" && time > 0) {
-        value = true;  // Resume the countdown when visible
+        value = true;  
         countTime();
     }
 });
