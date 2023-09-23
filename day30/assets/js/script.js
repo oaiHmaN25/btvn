@@ -7,7 +7,7 @@ var charCountDisplay = document.querySelector(".char");
 var wordCountDisplay = document.querySelector(".word");
 var btnTxt = document.querySelector(".txt");
 var fileName = document.querySelector(".filename");
-var content = divContent.innerText;
+
 var btnNew = document.querySelector(".new-text")
 var fontStyle = function(aCommandName, aShowDefaultUI, aValueArgument){
     document.execCommand(aCommandName, aShowDefaultUI, aValueArgument);
@@ -65,7 +65,7 @@ function downloadFile(blob,filename){
 }
 btnPdf.addEventListener("click", function () {
     // console.log(`ok`);
-    
+    var content = divContent.innerText;
     var opt = {
         margin:       1,
         filename:     fileName.value,
