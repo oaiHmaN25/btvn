@@ -1,46 +1,68 @@
-var button = document.querySelector("button");
-var timerDisplay = document.querySelector(".timer");
-var time = 20;  // Initial time in seconds
-var startTime = Date.now();
 
-button.addEventListener("click", function () {
-    console.log("Button clicked.");
-    window.location.href = "https://www.facebook.com/";
+// var checkCtrl = false;
+
+// $(document).keydown(function(e) {
+//     if (e.keyCode === 17) {
+//         checkCtrl = true;
+//     }
+// }).keyup(function(e) {
+//     if (e.keyCode === 17) {
+//         checkCtrl = false;
+//     }
+// }).keydown(function(e) {
+//     if (checkCtrl && e.keyCode === 85) {
+//         // Prevent Ctrl+U
+//         e.preventDefault();
+//         return false;
+//     }
+// });
+var button = document.querySelector("button");
+var time = 20;
+var timerDisplay = document.querySelector(".timer");
+var value = false;  // Start with the countdown paused
+var animation;
+
+button.addEventListener("click", function(){
+    console.log(`ok`);
+    window.location.href='https://www.facebook.com/';
 });
 
 function getTime(x) {
     time = x;
+    countTime();
+}
+
+function countTime() {
+    var startTime = new Date().getTime();
+    
+    function update() {
+        if (!value) return;  // Pause the countdown if isCounting is false
+
+        var currentTime = new Date().getTime();
+        var elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
+        var remaining = Math.max(time - elapsedSeconds, 0);
+
+        timerDisplay.innerHTML = remaining;
+        console.log(remaining);
+
+        if (remaining > 0) {
+            animation = requestAnimationFrame(update);
+        } else {
+            timerDisplay.innerHTML = `${remaining}`;
+            button.disabled = false;
+        }
+    }
+
     update();
 }
 
-function update() {
-    var currentTime = Date.now();
-    var elapsedTime = Math.floor((currentTime - startTime) / 1000);
-    var remaining = Math.max(time - elapsedTime, 0);
-
-    timerDisplay.innerHTML = remaining;
-
-    if (remaining > 0) {
-        requestAnimationFrame(update);
-    } else {
-        timerDisplay.innerHTML = "0";
-        button.disabled = false;
-    }
-}
-
-document.addEventListener("visibilitychange", function () {
+document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
-        startTime += Date.now() - currentTime;
-        console.log("Countdown paused.");
+        cancelAnimationFrame(animation);  // Stop the countdown when not visible
     } else if (document.visibilityState === "visible" && time > 0) {
-        console.log("Countdown resumed.");
-        update();
+        value = true;  // Resume the countdown when visible
+        countTime();
     }
 });
 
 getTime(time);
-
-
-
-
-
