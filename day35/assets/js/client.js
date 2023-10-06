@@ -18,7 +18,7 @@ export const client = {
         if(body != null){
             options.body = JSON.stringify(body);
         }
-        const response = await fetch(url.options);
+        const response = await fetch(url,options);
         const data = await response.json();
         return {response,data};
     },
@@ -26,15 +26,15 @@ export const client = {
         return this.send(url);
     },
     post : function(url){
-        return this.send(url,"POST", body);
+        return this.send(url,'POST', body);
     },
     put : function(url, body = {}){
-        return this.send(url,"PUT", body);
+        return this.send(url,'PUT', body);
     },
     patch : function(url, body = {}){
-        return this.send(url,"PATCH", body);
+        return this.send(url,'PATCH', body);
     },
     delete : function(url, body = {}){
-        return this.send(url,"DELETE");
+        return this.send(url,'DELETE');
     },
 }
