@@ -5,12 +5,24 @@ const postItem = document.querySelector(".post-item");
 let numPost = 10;
 let page = 1;
 
-const render = (posts) =>{
+ const render = (posts) =>{
+
     const postEl = document.querySelector(".posts");
     // postEl.innerText = "";
     // if(posts.length){
         posts.forEach( ({id,title,content }) => {
+            const html = `<div class="wrap">
+                    <p id="1">A</p>
+                    <!-- <p>Hoàng An</p> -->
+                    <span>Hoàng An</span>
+                        </div>
+                <div class="trend">
+                    <a href="#">popular</a>
+                    <a href="#">trending</a>
+                </div>`
             const postItem = document.createElement("div");
+            const postImg = document.createElement("div");
+            postItem.innerHTML += html;
             postItem.classList.add("post-item");
             const h2 = document.createElement("h2");
             const a = document.createElement("a");
@@ -18,9 +30,27 @@ const render = (posts) =>{
             a.href ="#";
             h2.appendChild(a);
             postItem.appendChild(h2);
+            postItem.append(postImg);
+            const img = document.createElement("img");
+            img.src = "assets/imgs/tongthongukrainezelenskyreuters-1664558183406.webp";
+            postImg.append(img);
+            const pImg = document.createElement("p");
+            postImg.append(pImg);
+            pImg.innerText = "Tổng thống Volodymyr Zelensky (Ảnh: Reuters)."
             const p = document.createElement("p");
             p.innerText = content;
+            // postItem.innerHTML(html);
             postItem.appendChild(p);
+            const postCate = document.createElement("div");
+            const imgCate = document.createElement("img");
+            imgCate.src = "assets/imgs/post-sq-1.jpg";
+            const pCate = document.createElement("p");
+            pCate.innerText = "Category : Thế giới";
+            const hr = document.createElement("hr");
+            postCate.append(imgCate);
+            postCate.append(pCate);
+            postItem.appendChild(postCate);
+            postItem.appendChild(hr);
             postEl.append(postItem);
         });
     // }
@@ -35,6 +65,7 @@ const getPosts = async (query = {}) =>{
 }
 
 getPosts({
+    
     _page : page,
     _limit : 10
 });
@@ -54,23 +85,14 @@ function showLoading(){
 }
 window.addEventListener("scroll", ()=>{
     const  {scrollTop, scrollHeight, clientHeight} = document.documentElement;
-    if(scrollTop + clientHeight >= scrollHeight - 5){
+    if(scrollTop + clientHeight >= scrollHeight ){
         showLoading();
     }
 })
 
-
-// async function loadInitialPosts() {
-//   const initialData = await getPosts({ _page: page, _limit: 10 });
-//   render(initialData);
-// }
-
-// // Load initial posts
-// loadInitialPosts();
-
-window.addEventListener("scroll", () => {
-  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-  if (scrollTop + clientHeight >= scrollHeight - 5) {
-    showLoading();
-  }
-});
+// window.addEventListener("scroll", () => {
+//   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+//   if (scrollTop + clientHeight >= scrollHeight - 5) {
+//     showLoading();
+//   }
+// });
