@@ -1,10 +1,10 @@
 import { config } from "./config.js";      
 import { client } from "./client.js";
 
-let countdownBtn = document.querySelector('.count');
+const countdownBtn = document.querySelector('.count');
 let countdownInterval;
 let quizData;
-let countdownElement = document.querySelector(".countdown");
+const countdownElement = document.querySelector(".countdown");
 const progressBar = document.querySelector(".progress-bar");
 let timer = 10;
 let score = 0;
@@ -12,8 +12,8 @@ const scoreP = document.querySelector(".score-ques");
 let currentQuestionIndex = 0;
 const quizTotal = document.querySelector(".quiz-list");
 const quizContainer = document.querySelector(".quiz");
-
-
+const quizResult = document.querySelector(".quiz-result");
+const quizResultInner = document.querySelector(".quiz-result-inner")
 const progress = () =>{
     const percentage = (value/timer) *100;
     progressBar.style.width = `${percentage}%`;
@@ -30,16 +30,17 @@ countdownBtn.addEventListener("click", function () {
   }, 1000); // Update the countdown every 1 second
 }) 
 // countdownBtn.addEventListener("click", function())
-function updateCountdown(targetDate) {
+async function updateCountdown(targetDate) {
   let now = new Date();
   let difference = targetDate - now;
     countdownBtn.style.display = "none";
-  if (difference < 0) {
+  if (difference <= 0) {
     clearInterval(countdownInterval);
     const p = document.createElement("p");
     p.innerText = 'Go';
     countdownElement.append(p);
-    countdownElement.style.display = "none";
+    await delay(1000);
+    countdownElement.classList.add("hide");
     quizContainer.classList.add("show");
     //  progressBar.style.width = '0%';
     // countdownBtn.innerText = 'Go';
@@ -61,6 +62,11 @@ const renderQuestion = (questionData) => {
     // Xóa nội dung hiện tại của .quiz-wrapper
     quizEl.innerHTML = '';
     // const totalQuestions = questionData.length;
+    // if(totalQuestions === questionData.length){
+    //     console.log(`ok`);
+    // }
+    
+    console.log(questionData.length);
     console.log(totalQuestions);
     quizTotal.innerText = `${currentQuestionIndex +1 }/${totalQuestions}`
     const quizQuestionDiv = document.createElement("div");
@@ -87,27 +93,88 @@ const renderQuestion = (questionData) => {
     quizEl.appendChild(quizAnswer);
    
 }
-const nextQuestion = () => {
-    
-    currentQuestionIndex++;
-    if (currentQuestionIndex < quizData.length) {
-        
-        renderQuestion(quizData[currentQuestionIndex]);
-    } //Check wrong answer and repeat choose
-    else  {
-        alert("Đã hoàn thành tất cả câu hỏi!");
-    } //Hiện điểm
-    // else {
+// const nextQuestion = () => {
+//     if (currentQuestionIndex < quizData.length) {
+//         currentQuestionIndex++;
+//         renderQuestion(quizData[currentQuestionIndex]);
+//     } //Check wrong answer and repeat choose
+//     else  {
+//         displayResult();
+//     } 
+// }
+const displayResult = () =>{
+    quizResult.classList.add('show');
+    const resultDiv = document.querySelector(".result");
+    const scoreSpan = document.createElement('span');
+    scoreSpan.innerText = `${score} score`;
 
-    // }
+    const streakSpan = document.createElement('span');
+    streakSpan.innerText = '0 streak';
+
+    const correctSpan = document.createElement('span');
+    correctSpan.innerText = trueAnswer;
+
+    const incorrectSpan = document.createElement('span');
+    incorrectSpan.innerText = falseAnswer;
+    const playAgainButton = document.createElement('button');
+    playAgainButton.classList.add('btn-again');
+    playAgainButton.innerText = 'Play again';
+    // Hide the quiz questions
+    resultDiv.append(scoreSpan);
+    resultDiv.append(streakSpan);
+    resultDiv.append(correctSpan);
+    resultDiv.append(incorrectSpan);
+    quizResultInner.append(resultDiv)
+    quizResultInner.appendChild(playAgainButton);
+    playAgainButton.addEventListener("click",resetQuiz);
+    quizContainer.style.display = 'none';
 }
-const checkAnswer =  (pOption, selectedOption, correctAnswer) => {
+const resetQuiz = () => {
+  // Reset variables
+  currentQuestionIndex = 0;
+  questionAnswer = 0;
+  trueAnswer = 0;
+  falseAnswer = 0;
+  score = 0;
+    const p = document.querySelectorAll(".countdown p");
+    console.log(p);
+  // Clear quiz result
+//   quizResultInner.innerHTML = '';
+
+  // Reset countdown and progress bar
+//   countdownElement.innerHTML = '';
+//   progressBar.style.width = '0%';
+
+  // Show countdown button
+  countdownElement.classList.remove("hide");
+//   countdownElement.style.display = "block"
+    countdownBtn.style.display = "block"
+    // p.style.display = "none";
+    p.forEach((element) =>{
+        // console.log(element);
+        element.remove();
+    })
+  // Render the first question
+//   renderQuestion(quizData[currentQuestionIndex]);
+};
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+let questionAnswer = 0;
+let trueAnswer = 0;
+let falseAnswer = 0;
+const checkAnswer = async (pOption, selectedOption, correctAnswer) => {
+    if (pOption.disabled) {
+    return;
+  }
+    
     if (selectedOption === correctAnswer) {
         // alert("Câu trả lời đúng!");
         // const
+        trueAnswer++;
         score += 500;
         scoreP.innerText = `Score: ${score}`;
         pOption.classList.add("active");
+        // nextQuestion();
         currentQuestionIndex++;
         if (currentQuestionIndex < quizData.length) {
             setTimeout(() => {
@@ -115,14 +182,26 @@ const checkAnswer =  (pOption, selectedOption, correctAnswer) => {
             }, 1000);  // Delay 1 second before rendering next question
         }
     } else {
-        pOption.classList.add("false")
+        pOption.classList.add("false");
+        falseAnswer++;
         currentQuestionIndex++;
+        // nextQuestion();
         if (currentQuestionIndex < quizData.length) {
             setTimeout(() => {
                 renderQuestion(quizData[currentQuestionIndex]);
             }, 1000);  // Delay 1 second before rendering next question
         }
     }
+    questionAnswer++;
+    console.log(`${questionAnswer}`);
+    if(questionAnswer === totalQuestions){
+        // displayResult();
+        await delay(1000); // Adjust the delay duration as needed (e.g., 1000ms = 1 second)
+        displayResult();
+
+    }
+    const allOptions = document.querySelectorAll('.quiz-answer p');
+    allOptions.forEach((opt) => (opt.disabled = true));
     // nextQuestion();
     
 }
@@ -138,5 +217,6 @@ const getQuizs = async (query = {}) =>{
     renderQuestion(quizData[currentQuestionIndex]);
     // return data;
 }
-getQuizs()
 
+
+getQuizs();
