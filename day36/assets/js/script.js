@@ -5,8 +5,9 @@ const countdownBtn = document.querySelector('.count');
 let countdownInterval;
 let quizData;
 const countdownElement = document.querySelector(".countdown");
-const progressBar = document.querySelector(".progress-bar");
-let timer = 10;
+const progressBar = document.querySelector(".quiz .progress-bar");
+const timeQuestion = document.querySelector(".quiz .timer")
+
 let score = 0;
 const scoreP = document.querySelector(".score-ques"); 
 let currentQuestionIndex = 0;
@@ -14,10 +15,33 @@ const quizTotal = document.querySelector(".quiz-list");
 const quizContainer = document.querySelector(".quiz");
 const quizResult = document.querySelector(".quiz-result");
 const quizResultInner = document.querySelector(".quiz-result-inner")
-const progress = () =>{
-    const percentage = (value/timer) *100;
+const progress = (value) => {
+    const percentage = ((value) / 20) * 100; // Update progress calculation based on 20 seconds
     progressBar.style.width = `${percentage}%`;
 }
+// let timer = 10;
+// progress(3);
+let timer = 20;
+const startTime = (time) =>{
+    timer = setInterval(()=>{
+        if(timer > 0){
+            progress(time);
+            time--;
+        } else{
+            clearInterval(timer);
+      currentQuestionIndex++;
+
+      // Check if there are more questions
+      if (currentQuestionIndex < totalQuestions) {
+        renderQuestion(quizData[currentQuestionIndex]);
+      } else {
+        // If there are no more questions, display the result
+        displayResult();
+      }
+        }
+    },1000)
+}
+
 // let progressBar = document.getElementById('progress-bar');
 countdownBtn.addEventListener("click", function () {
   let targetDate = new Date();
@@ -55,8 +79,10 @@ async function updateCountdown(targetDate) {
   }
 }
 
-const renderQuestion = (questionData) => {
-    
+const renderQuestion =  (questionData) => {
+    clearInterval(timer);
+    progressBar.style.width = "100%"
+    startTime(20);
     const quizEl = document.querySelector(".quiz-wrapper");
 
     // Xóa nội dung hiện tại của .quiz-wrapper
@@ -106,19 +132,24 @@ const displayResult = () =>{
     quizResult.classList.add('show');
     const resultDiv = document.querySelector(".result");
     const scoreSpan = document.createElement('span');
-    scoreSpan.innerText = `${score} score`;
+    scoreSpan.innerText = `${score} Score`;
 
     const streakSpan = document.createElement('span');
     streakSpan.innerText = '0 streak';
 
     const correctSpan = document.createElement('span');
-    correctSpan.innerText = trueAnswer;
+    correctSpan.innerText = `${trueAnswer} Correct`;
 
     const incorrectSpan = document.createElement('span');
-    incorrectSpan.innerText = falseAnswer;
+    incorrectSpan.innerText = `${falseAnswer} Incorrect`;
     const playAgainButton = document.createElement('button');
     playAgainButton.classList.add('btn-again');
     playAgainButton.innerText = 'Play again';
+    // console.log(totalQuestions);
+    // console.log(trueAnswer);
+    const progressBarA = document.querySelector(".accuracy .progress-bar")
+    let width = (trueAnswer/totalQuestions) *100;
+    progressBarA.style.width = `${width}%`;
     // Hide the quiz questions
     resultDiv.append(scoreSpan);
     resultDiv.append(streakSpan);
@@ -155,7 +186,7 @@ const resetQuiz = () => {
         element.remove();
     })
   // Render the first question
-//   renderQuestion(quizData[currentQuestionIndex]);
+  renderQuestion(quizData[currentQuestionIndex]);
 };
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -163,13 +194,18 @@ let questionAnswer = 0;
 let trueAnswer = 0;
 let falseAnswer = 0;
 const checkAnswer = async (pOption, selectedOption, correctAnswer) => {
+    const quizEl = document.querySelector(".quiz-wrapper");
     if (pOption.disabled) {
     return;
   }
     
     if (selectedOption === correctAnswer) {
+        
         // alert("Câu trả lời đúng!");
-        // const
+        const div = document.createElement("div");
+        div.classList.add("correct");
+        quizEl.append(div);
+        div.innerText = "Correct";
         trueAnswer++;
         score += 500;
         scoreP.innerText = `Score: ${score}`;
@@ -183,6 +219,10 @@ const checkAnswer = async (pOption, selectedOption, correctAnswer) => {
         }
     } else {
         pOption.classList.add("false");
+         const div = document.createElement("div");
+        div.classList.add("incorrect");
+        quizEl.append(div);
+        div.innerText = "Incorrect";
         falseAnswer++;
         currentQuestionIndex++;
         // nextQuestion();
