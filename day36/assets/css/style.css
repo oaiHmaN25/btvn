@@ -106,7 +106,7 @@ body{
     height: 100vh;
 }
 .quiz-wrapper .quiz-question p {
-    height: 43vh;
+    height: 35vh;
     /* width: 100%; */
     text-align: center;
     display: flex;

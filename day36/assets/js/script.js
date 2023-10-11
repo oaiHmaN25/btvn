@@ -162,31 +162,7 @@ const displayResult = () =>{
 }
 const resetQuiz = () => {
   // Reset variables
-  currentQuestionIndex = 0;
-  questionAnswer = 0;
-  trueAnswer = 0;
-  falseAnswer = 0;
-  score = 0;
-    const p = document.querySelectorAll(".countdown p");
-    console.log(p);
-  // Clear quiz result
-//   quizResultInner.innerHTML = '';
-
-  // Reset countdown and progress bar
-//   countdownElement.innerHTML = '';
-//   progressBar.style.width = '0%';
-
-  // Show countdown button
-  countdownElement.classList.remove("hide");
-//   countdownElement.style.display = "block"
-    countdownBtn.style.display = "block"
-    // p.style.display = "none";
-    p.forEach((element) =>{
-        // console.log(element);
-        element.remove();
-    })
-  // Render the first question
-  renderQuestion(quizData[currentQuestionIndex]);
+  window.location.reload();
 };
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
