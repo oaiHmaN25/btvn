@@ -1,0 +1,134 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #272727;
+    color: white;
+}
+.form-signup{
+    font-size: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+.form-signup a{
+    color: white;
+}
+.form-signup .form-control{
+    gap: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    
+}
+.form-signup .form-control label{
+    color: #6EEB83;
+    font-weight: 600;
+    
+}
+.form-signup .form-control input{
+    border-radius: 5px;
+    border: none;
+    padding: 6px 25px;
+    background-color: #30445B;
+    border: 1px solid white;
+   
+} 
+.form-signup .form-control input::placeholder{
+ color: grey(85, 70, 70);
+}
+.form-signup .form-control-button button{
+    border: none;
+    padding: 10px 30px;
+    margin-top: 20px;
+    border-radius: 10px;
+    color: black;
+}
+#signUpButton {
+  background-color: #67D87A; /* Change to your desired color */
+
+  border: none;
+  /* padding: 10px 20px; */
+  cursor: pointer;
+}
+
+/* Style for the disabled "Sign In" button */
+#signInButton {
+  background-color: gray; /* Change to your desired disabled color */
+
+  border: none;
+  /* padding: 10px 20px; */
+  /* cursor: not-allowed; */
+}
+#signInButton:hover{
+    background-color:#67D87A ;
+}
+.form-signin{
+    font-size: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+.form-signin a{
+    color: white;
+}
+.form-signin .form-control{
+    gap: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    
+}
+.form-signin .form-control label{
+    color: #6EEB83;
+    font-weight: 600;
+    
+}
+.form-signin .form-control input{
+    border-radius: 5px;
+    border: none;
+    padding: 6px 25px;
+    background-color: #30445B;
+    border: 1px solid white;
+   
+} 
+.form-signin .form-control input::placeholder{
+ color: grey(85, 70, 70);
+}
+.form-signin .form-control-button button{
+    border: none;
+    padding: 10px 30px;
+    margin-top: 20px;
+    border-radius: 10px;
+    color: black;
+}
+.form-signin #signInButton {
+  background-color: #67D87A; /* Change to your desired color */
+
+  border: none;
+  /* padding: 10px 20px; */
+  cursor: pointer;
+}
+
+/* Style for the disabled "Sign In" button */
+.form-signin #signUpButton {
+  background-color: gray; /* Change to your desired disabled color */
+
+  border: none;
+  /* padding: 10px 20px; */
+  /* cursor: not-allowed; */
+}
+.form-signin #signUpButton:hover{
+    background-color:#67D87A ;
+}
