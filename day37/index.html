@@ -8,55 +8,63 @@
 </head>
 <body>
     <div class="container">
-        <div class="form-signup">
+        <div class="signup">
+            <div class="form-signup">
             <div class="intro">
                 <h1>Sign Up</h1>
                 <p>Please enter your name, email and password.</p>
                 <a href="">Go to home</a>
             </div>
-            <form action="">
+            <form action="#" class="signupform">
                 <div class="form-control">
                     <label for="name">Enter Your name</label>
-                    <input type="text" id="name" placeholder="Please Enter Your name ">
+                    <input type="text" id="name" class="nameS" placeholder="Please Enter Your name ">
                 </div>
                 <div class="form-control">
                     <label for="email" >Enter Your email</label>
-                <input type="text" id = "email" placeholder="Please Enter Your email ">
+                <input type="email" id = "email" class="emailS" placeholder="Please Enter Your email ">
                 </div>
                 <div class="form-control">
                     <label for="password">Enter Your password</label>
-                <input type="text" id = "password" placeholder="Please Enter Your password ">
+                <input type="password" id = "password" class="passwordS" placeholder="Please Enter Your password ">
                 </div>
                 <div class="form-control-button">
-                    <button id="signInButton" disabled>Sign In</button>
-                    <button id="signUpButton">Sign Up</button>
+                    <button id="signInButton" >Sign In</button>
+                    <button id="signUpButton" >Sign Up</button>
                 </div>
             </form>
+            
         </div>
-        <div class="form-signin">
+        </div>
+        <div class="signin">
+            <div class="form-signin">
             <div class="intro">
                 <h1>Sign In</h1>
                 <p>Please enter your email and password.</p>
                 <a href="">Go to home</a>
             </div>
-            <form action="">
+            <form action="#" class="signinform">
                 <div class="form-control">
                     <label for="email" >Enter Your email</label>
-                <input type="text" id = "email" placeholder="Please Enter Your email ">
+                <input type="email" id = "email" class="email" placeholder="Please Enter Your email ">
                 </div>
                 <div class="form-control">
                     <label for="password">Enter Your password</label>
-                <input type="text" id = "password" placeholder="Please Enter Your password ">
+                <input type="password" id = "password" class="password" placeholder="Please Enter Your password ">
                 </div>
                 <div class="form-control-button">
                     <button id="signInButton" >Sign In</button>
-                    <button id="signUpButton" disabled>Sign Up</button>
+                    <button id="signUpButton" >Sign Up</button>
                 </div>
             </form>
+                
         </div>
+        </div>
+        
     </div>
 
-
+    <div class="posts">
+        </div>
     <!-- <script type="module" src="assets/js/script.js"></script> -->
     <script type="module" src="assets/js/script.js"></script>
 </body>
