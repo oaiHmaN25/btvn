@@ -94,30 +94,8 @@ const renderAfterLogin = () => {
     containerLogin.style.display = "none";
     
     const postEl = document.querySelector(".posts");
-    
-//    const htmlForm = `<div class="table">
-//     <form action="#" class="addblog">
-//         <label for="title">Enter Your title</label>
-//         <input type="text" class="title" id="title">
-//         <label for="content">Enter your content</label>
-//         <div class="content" contenteditable="true"></div>
-//         <div>
-//             <button class="write">Write new!</button>
-//         </div>
-//     </form>
-//     </div>`
-//     postEl.innerHTML += htmlForm
+    postEl.style.display = "block"
 
-// // Append elements to the form
-// form.appendChild(titleLabel);
-// form.appendChild(titleInput);
-// form.appendChild(contentLabel);
-// form.appendChild(contentDiv);
-//     form.appendChild(buttonW);
-//     console.log(tableDiv);
-//     postEl.append(tableDiv);
-// Append the form to the main div
-// tableDiv.appendChild(form);
     postEl.innerHTML = `<h1>Welcome to the logged-in page!</h1>
     <div class="table">
     <form action="#" class="addblog">
@@ -131,6 +109,21 @@ const renderAfterLogin = () => {
     </form>
     </div>
     `;
+    var form = document.querySelector(".table");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const titleEL = document.querySelector("input#title");
+        const contentEL = document.querySelector(".content");
+        console.log(title,content);
+        var title = titleEL.value;
+        var content = contentEL.textContent;
+        console.log(titleEL, contentEL);
+        
+        if (title && content) {
+            addBlog(title, content);
+        }
+        console.log(`ok`);
+    });
     const button = document.createElement("button");
     postEl.append(button)
     button.innerText = "Sign Out"
@@ -221,7 +214,25 @@ async function registerAccount(email, password, name) {
 }
 
 getBlogs();
+// addBlog("Test");
+// async function handleNewBlog(title, content) {
+//   const { response } = await client.post("/blogs",  );
+//   if (response.ok) {
+//     renderBlogs();
+//     titleEL.value = "";
+//     contentEL.value = "";
+//   }
+// }
+async function addBlog(title,content) {
+    const { response } = await client.post('/blogs', {title,content});
+    if (response.ok) {
 
+        console.log(`ok`);
+    renderAfterLogin();
+    titleEL.value = "";
+    contentEL.value = "";
+  }
+}
 singInForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const emailEl = e.target.querySelector(".email");
@@ -243,6 +254,7 @@ singInForm.addEventListener("submit", (e) => {
    
 
 })
+
 signUpForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const nameEl = e.target.querySelector(".nameS");
