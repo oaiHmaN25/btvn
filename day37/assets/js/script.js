@@ -45,6 +45,7 @@ const render = (blogs) => {
         if (postEl) {
             const postItem = document.createElement("div");
             const firstName = userId.name.charAt(0);
+            console.log(userId.name);
             console.log(firstName);
             const htmlInner = `<div class="trend">
                     <a href="#">View more that bug</a>
@@ -138,6 +139,7 @@ const renderAfterLogin = () => {
         if (postEl) {
             const postItem = document.createElement("div");
             const firstName = userId.name.charAt(0);
+            console.log(userId.name);
             console.log(firstName);
             const htmlInner = `<div class="trend">
                     <a href="#">View more that bug</a>
