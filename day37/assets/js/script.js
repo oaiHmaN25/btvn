@@ -7,6 +7,9 @@ client.setUrl(SERVER_AUTH_API);
 const containerLogin = document.querySelector(".container");
 const signUpButton = document.getElementById('signUpButton');
 const signInButton = document.getElementById('.signInButton');
+const loadingSpinner = document.getElementById("loading");
+let page = 1;
+let limit = 10;
 // signInButton
 const singInForm = document.querySelector(".signin");
 const signUpForm = document.querySelector(".signup");
@@ -15,7 +18,10 @@ const signUpForm = document.querySelector(".signup");
 let blogsData = [];
 const signup = document.querySelector(".signupform");
 const render = (blogs) => {
-    const postEl = document.querySelector(".posts");
+    if (checkLogin() === true) {
+        renderAfterLogin();
+    } else {
+        const postEl = document.querySelector(".posts");
     postEl.innerHTML = '';
     const button = document.createElement("button");
     postEl.append(button)
@@ -41,27 +47,45 @@ const render = (blogs) => {
     })
     postEl.append(button);
     postEl.append(buttonSignup)
-    blogs.data.forEach(({ id, title, content,userId }) => {
+    blogs.data.forEach(({ id, title, content,userId,createdAt }) => {
         if (postEl) {
             const postItem = document.createElement("div");
             const firstName = userId.name.charAt(0);
             console.log(userId.name);
             console.log(firstName);
+
+            console.log(createdAt);
+            const dateObject = new Date(createdAt);
+            const hours = dateObject.getHours(); // Lấy giờ
+            const minutes = dateObject.getMinutes(); // Lấy phút
+            const buoi = hours >= 12 ? "Chiều" : "Sáng";
+            const gio12Gio = hours > 12 ? hours - 12 : hours;
+            const timeNow = new Date();
+            const timePost = timeNow - dateObject;
+            const chenhLechPhut = Math.floor(timePost / (1000 * 60));
+            const chenhLechGio = Math.floor(chenhLechPhut / 60);
+            const chenhLechPhutConLai = chenhLechPhut % 60;
+            // console.log(`Chênh lệch: ${chenhLechGio} giờ ${chenhLechPhutConLai} phút`);
             const htmlInner = `<div class="trend">
                     <a href="#">View more that bug</a>
                     <a href="#">${userId.name}</a>
+                    <a href="#">${gio12Gio}h  ${buoi} ${minutes} phút</a>
+                    <a href="#">${chenhLechGio}h   ${chenhLechPhutConLai}phút trước</a>
                 </div>`;
             const html = `<div class="wrap">
                     <p id="1">${firstName}</p>
                     <!-- <p>Hoàng An</p> -->
                     <span>${userId.name}</span>
                         </div>
+
                 `
             postItem.innerHTML += html;
             postItem.classList.add("post-item");
             const h2 = document.createElement("h2");
-            const  h3= document.createElement("h3");
-            h2.innerText = content
+            const h3 = document.createElement("h3");
+            content = regex(content);
+            console.log(content);
+            h2.innerHTML = content
             h3.innerText = title;
             postItem.appendChild(h2)
             postItem.appendChild(h3);
@@ -71,6 +95,8 @@ const render = (blogs) => {
             postEl.append(hr)
         }
     })
+    }
+    
 };
 const getBlogs = async (query = {}) => {
     try {
@@ -80,7 +106,7 @@ const getBlogs = async (query = {}) => {
         if (response && response.status === 200) {
             console.log("Data retrieved successfully:", data);
             blogsData = data;
-            console.log(blogsData);
+            // console.log(blogsData);
             render(data);
         } else {
             console.error("Failed to get blog data:", response);
@@ -91,7 +117,8 @@ const getBlogs = async (query = {}) => {
 };
 
 const renderAfterLogin = () => {
-    console.log(blogsData);
+    
+        console.log(blogsData);
     containerLogin.style.display = "none";
     
     const postEl = document.querySelector(".posts");
@@ -107,6 +134,7 @@ const renderAfterLogin = () => {
         <div>
             <button class="write">Write new!</button>
         </div>
+        
     </form>
     </div>
     `;
@@ -119,15 +147,15 @@ const renderAfterLogin = () => {
         var title = titleEL.value;
         var content = contentEL.textContent;
         console.log(titleEL, contentEL);
-        
+        const token = localStorage.getItem("access_token");
         if (title && content) {
-            addBlog(title, content);
+            addBlog(title, content,token);
         }
         console.log(`ok`);
     });
     const button = document.createElement("button");
     postEl.append(button)
-    button.innerText = "Sign Out"
+    button.innerText = "Log Out"
     button.classList.add("signin");
     button.addEventListener("click", (e) => {
         e.preventDefault();
@@ -135,26 +163,44 @@ const renderAfterLogin = () => {
         localStorage.removeItem("refresh_token");
         render(blogsData);
     })
-    blogsData.data.forEach(({ id, title, content,userId }) => {
+    blogs.data.forEach(({ id, title, content,userId,createdAt }) => {
         if (postEl) {
             const postItem = document.createElement("div");
             const firstName = userId.name.charAt(0);
             console.log(userId.name);
             console.log(firstName);
+
+            console.log(createdAt);
+            const dateObject = new Date(createdAt);
+            const hours = dateObject.getHours(); // Lấy giờ
+            const minutes = dateObject.getMinutes(); // Lấy phút
+            const buoi = hours >= 12 ? "Chiều" : "Sáng";
+            const gio12Gio = hours > 12 ? hours - 12 : hours;
+            const timeNow = new Date();
+            const timePost = timeNow - dateObject;
+            const chenhLechPhut = Math.floor(timePost / (1000 * 60));
+            const chenhLechGio = Math.floor(chenhLechPhut / 60);
+            const chenhLechPhutConLai = chenhLechPhut % 60;
+            // console.log(`Chênh lệch: ${chenhLechGio} giờ ${chenhLechPhutConLai} phút`);
             const htmlInner = `<div class="trend">
                     <a href="#">View more that bug</a>
                     <a href="#">${userId.name}</a>
+                    <a href="#">${gio12Gio}h  ${buoi} ${minutes} phút</a>
+                    <a href="#">${chenhLechGio}h   ${chenhLechPhutConLai}phút trước</a>
                 </div>`;
             const html = `<div class="wrap">
                     <p id="1">${firstName}</p>
                     <!-- <p>Hoàng An</p> -->
                     <span>${userId.name}</span>
                         </div>
+
                 `
             postItem.innerHTML += html;
             postItem.classList.add("post-item");
             const h2 = document.createElement("h2");
-            const  h3= document.createElement("h3");
+            const h3 = document.createElement("h3");
+            content = regex(content);
+            content.split("");
             h2.innerText = content
             h3.innerText = title;
             postItem.appendChild(h2)
@@ -174,65 +220,64 @@ async function handleSignIn(email, password) {
       email,
       password,
     });
-    
-    const access_token = tokens.data.accessToken;
-    const refresh_token = tokens.data.refreshToken;
-    localStorage.setItem('access_token', access_token);
-    localStorage.setItem('refresh_token', refresh_token);
-    console.log(access_token,refresh_token);
-    // render(tokens.data)
-    
-    renderAfterLogin();
+    console.log(tokens);
+    console.log(tokens.message);
 
-    console.log(tokens.data);
+
+    // if (email !== "john@gmail.com" || password !== "changeme") {
+    if (tokens.status_code === "FAILED") {
+        showErrorPopup(`${tokens.message}`);
+    } else {
+            const access_token = tokens.data.accessToken;
+    const refresh_token = tokens.data.refreshToken;
+        // Perform the actual login logic here
+        // console.log(access_token, refresh_token);
+         localStorage.setItem('access_token', access_token);
+    localStorage.setItem('refresh_token', refresh_token);
+        renderAfterLogin();
+    }
 }
 async function getBlogId() {
     const { data: tokens } = await client.get("/blogId");
     console.log(tokens);
 }
-getBlogId();
+// getBlogId();
 async function registerAccount(email, password, name) {
     const { data: tokens } = await client.post("/auth/register", {
       email,
       password,
       name
     });
+    loadingSpinner.style.display = "block";
     const userData = tokens;
     console.log(tokens.status_code);
     if (tokens.status_code === "FAILED") {
-        // console.log(`ok`);
-        const div = document.createElement("div");
-        div.innerText = "Tài khoản đã tồn tại";
-        signup.append(div);
-        setTimeout( document.location.reload() ,10000)
+        showErrorPopup(`${tokens.message}`);
+         loadingSpinner.style.display = "none";
     } else {
-        singInForm.style.display = "block";
-        signUpForm.style.display = "none";
+         loadingSpinner.style.display = "none";
+        // singInForm.style.display = "block";
+        // signUpForm.style.display = "none";
     }
 
-        // Handle the response data accordingly
     console.log("Registration successful:", userData);
 
 }
 
 getBlogs();
-// addBlog("Test");
-// async function handleNewBlog(title, content) {
-//   const { response } = await client.post("/blogs",  );
-//   if (response.ok) {
-//     renderBlogs();
-//     titleEL.value = "";
-//     contentEL.value = "";
-//   }
-// }
-async function addBlog(title,content) {
-    const { response } = await client.post('/blogs', {title,content});
-    if (response.ok) {
 
+async function addBlog(title,content,token) {
+    const { data } = await client.post('/blogs', {title,content},token);
+     if (data.code === 200) {
         console.log(`ok`);
-    renderAfterLogin();
-    titleEL.value = "";
-    contentEL.value = "";
+        renderAfterLogin();
+        titleEL.value = "";
+        contentEL.value = "";
+     } else if (data.status === 401) {
+         const refreshToken = localStorage.getItem("refresh_token");
+         const dataBlog = await refreshToken(refreshToken);
+         console.log(dataBlog);
+       showErrorPopup(`${tokens.message}`);  
   }
 }
 singInForm.addEventListener("submit", (e) => {
@@ -242,18 +287,17 @@ singInForm.addEventListener("submit", (e) => {
     console.log(e.target);
     const email = emailEl.value;
     const password = passwordEl.value;
-    // blogsData.data.forEach(({ emailL, passwordL }) => {
-    //     if (emailL !== email || passwordL !== password) {
-    //         // alert("Tài khoản khong tồn tại")
-    //         document.location.reload();
-    //     }else {
-        
-    // }
-        
-    // }) 
     console.log(email, password);
-    handleSignIn( email, password );
-   
+    loadingSpinner.style.display = "block";
+
+    // Add a delay before calling handleSignIn
+    setTimeout(() => {
+        handleSignIn(email, password);
+
+        // Hide the loading spinner when the process is complete
+        loadingSpinner.style.display = "none";
+    }, 3000); 
+    
 
 })
 
@@ -266,6 +310,103 @@ signUpForm.addEventListener("submit", (e) => {
     const name = nameEl.value;
     const email = emailEl.value;
     const password = passwordEl.value;
-    registerAccount(email,name,password);
+    registerAccount(email,password,name);
     console.log(name,email,password);
+})
+function showErrorPopup(message) {
+    const errorPopup = document.getElementById("error-popup");
+    const errorMessage = document.getElementById("error-message");
+
+    errorMessage.textContent = message;
+    errorPopup.style.display = "block";
+
+    // Automatically close the popup after 5 seconds
+    setTimeout(() => {
+        closePopup();
+    }, 3000); // 5000 milliseconds (5 seconds)
+}
+
+// Function to close the error popup
+function closePopup() {
+    const errorPopup = document.getElementById("error-popup");
+    errorPopup.style.display = "none";
+}
+
+function regex (content) {
+    const patternEmail = /([a-z\.0-9-_]{2,}@[a-z-_\.0-9]+\.[a-z]{2,})/g
+    const patternPhone = /((0|\+84)\d{9})/g;
+    const patternYoutube =  /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/g;
+    // const patternLink = //;
+    const patternSpace = /\s/g;
+    const patternLine = /\n/g;
+    const patternLink = /((https?:\/\/)|(www\.))[^\s]+/g;
+    const ytbLink = content.match(patternYoutube);
+    if (ytbLink) {
+        contentYtb = content.replace(patternYoutube, `<iframe width="560" height="315" src="$1" frameborder="0" allowfullscreen></iframe>`)
+        console.log(contentYtb);
+    }
+    // else if (content.match(patternPhone)) {
+    //     content = content.replace(patternPhone, `<a href =""el:$1" >$1</a>`);
+    //     console.log(content);
+    // } 
+    // else if (content.match(patternEmail)) {
+    //     content = content.replace(patternEmail, `<a href ="email:$1">$1</a>`)
+    //     console.log(content);
+    // }
+    // else if (content.match(patternSpace)) {
+    //     content = content.replace(patternSpace, " ");
+    //     console.log(content);
+    // }
+    // else if (content.match(patternLine)) {
+    //     content = content.replace(patternLine, "\n");
+    //     console.log(content);
+    // }
+   
+   
+  
+    
+    return content;
+
+}
+async function  refreshToken(refreshToken) {
+    const { data } = await client.post('/auth/refresh-token', { refreshToken });
+    if (data.code === 200) {
+        return data.token;
+    } else if (data.code === 401) {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        render(blogsData);
+    }
+}
+
+function checkLogin() {
+    const accessToken = localStorage.getItem("access_token");
+    if (accessToken) {
+        return true
+    } else {
+        return false;
+    }
+}
+const loaderP = document.querySelector(".loader-page")
+function showLoading(){
+    loaderP.classList.add("show");
+    // console.log();
+    setTimeout(()=>{
+        loaderP.classList.remove("show");
+
+        setTimeout(async ()=>{
+            page++;
+            const newData = await getBlogs({ page:page, limit:10 });
+            // render(newData);
+
+        },300)
+    },1000)
+}
+window.addEventListener("scroll", ()=>{
+    const  {scrollTop, scrollHeight, clientHeight} = document.documentElement;
+    if(scrollTop + clientHeight >= scrollHeight ){
+        showLoading();
+        console.log(page);
+        console.log(limit);
+    }
 })

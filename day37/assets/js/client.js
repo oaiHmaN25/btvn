@@ -7,8 +7,10 @@ export const client = {
     },
     send: async function (url,method='GET', body = null, token = null){
         url = `${this.serverApi}${url}`
-        const headers = {
-                "Content-Type" :"application/json"}
+        let headers = {
+            "Content-Type": "application/json"
+        }
+        console.log(token);
         if(token){
             headers["Authorization"] = `Bearer ${token}`;
         }
@@ -19,6 +21,7 @@ export const client = {
         if(body != null){
             options.body = JSON.stringify(body);
         }
+        console.log(options);
         const response = await fetch(url,options);
         const data = await response.json();
         return {response,data};
