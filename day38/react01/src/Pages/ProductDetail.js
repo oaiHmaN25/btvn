@@ -1,4 +1,4 @@
-import { navigate } from "../Utils/router"
+// import { navigate } from "../Utils/router"
 
 export const ProductDetail = ({ id }) => {
     // const { id } = params;

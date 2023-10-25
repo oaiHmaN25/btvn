@@ -17,7 +17,9 @@ export const  router = (routes, defaultComponent) => {
     document.getElementById('root').innerHTML = Error();
   });
   router.resolve();
-
+  window.navigate = (path) => {
+    router.navigate(path);
+  }
   return router;
 }
 
