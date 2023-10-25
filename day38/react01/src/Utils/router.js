@@ -25,6 +25,6 @@ export function startRouting() {
   router.navigate(window.location.hash);
 }
 
-export function navigateTo(path) {
+export const navigate = (path) => {
   router.navigate(path);
 }
