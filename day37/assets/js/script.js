@@ -16,6 +16,7 @@ const signUpForm = document.querySelector(".signup");
 // console.log(singInForm);
 // console.log(containerLogin);
 let blogsData = [];
+console.log(blogsData);
 const signup = document.querySelector(".signupform");
 const render = (blogs) => {
     if (checkLogin() === true) {
@@ -163,7 +164,7 @@ const renderAfterLogin = () => {
         localStorage.removeItem("refresh_token");
         render(blogsData);
     })
-    blogs.data.forEach(({ id, title, content,userId,createdAt }) => {
+    blogsData.data.forEach(({ id, title, content,userId,createdAt }) => {
         if (postEl) {
             const postItem = document.createElement("div");
             const firstName = userId.name.charAt(0);
@@ -193,15 +194,14 @@ const renderAfterLogin = () => {
                     <!-- <p>Hoàng An</p> -->
                     <span>${userId.name}</span>
                         </div>
-
                 `
             postItem.innerHTML += html;
             postItem.classList.add("post-item");
             const h2 = document.createElement("h2");
             const h3 = document.createElement("h3");
             content = regex(content);
-            content.split("");
-            h2.innerText = content
+            // content.split("");
+            h2.innerHTML = content
             h3.innerText = title;
             postItem.appendChild(h2)
             postItem.appendChild(h3);
@@ -334,37 +334,33 @@ function closePopup() {
 
 function regex (content) {
     const patternEmail = /([a-z\.0-9-_]{2,}@[a-z-_\.0-9]+\.[a-z]{2,})/g
-    const patternPhone = /((0|\+84)\d{9})/g;
-    const patternYoutube =  /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/g;
+    const patternPhone = /((0|\+84|84)\d{9})/g;
+    const patternYoutube =  /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)(([\w\-]+)(\S+)?)/g;
     // const patternLink = //;
     const patternSpace = /\s/g;
     const patternLine = /\n/g;
     const patternLink = /((https?:\/\/)|(www\.))[^\s]+/g;
     const ytbLink = content.match(patternYoutube);
     if (ytbLink) {
-        contentYtb = content.replace(patternYoutube, `<iframe width="560" height="315" src="$1" frameborder="0" allowfullscreen></iframe>`)
-        console.log(contentYtb);
+        content = content.replace(patternYoutube, `<iframe width="560" height="315" src="https://www.youtube.com/embed/$7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>\n`)
+        console.log(content);
     }
-    // else if (content.match(patternPhone)) {
-    //     content = content.replace(patternPhone, `<a href =""el:$1" >$1</a>`);
-    //     console.log(content);
-    // } 
-    // else if (content.match(patternEmail)) {
-    //     content = content.replace(patternEmail, `<a href ="email:$1">$1</a>`)
-    //     console.log(content);
-    // }
-    // else if (content.match(patternSpace)) {
-    //     content = content.replace(patternSpace, " ");
-    //     console.log(content);
-    // }
-    // else if (content.match(patternLine)) {
-    //     content = content.replace(patternLine, "\n");
-    //     console.log(content);
-    // }
-   
-   
-  
-    
+    else if (content.match(patternPhone)) {
+        content = content.replace(patternPhone, `<a href =""el:$1" >$1</a>\n`);
+        console.log(content);
+    } 
+     if (content.match(patternEmail)) {
+        content = content.replace(patternEmail, `<a href ="email:$1">$1</a>\n`)
+        console.log(content);
+    }
+    else if (content.match(patternSpace)) {
+        content = content.replace(patternSpace, " ");
+        console.log(content);
+    }
+    else if (content.match(patternLine)) {
+        content = content.replace(patternLine, "/\n/");
+        console.log(content);
+    } 
     return content;
 
 }
