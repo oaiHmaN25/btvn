@@ -1,7 +1,7 @@
 // import { navigate } from "../Utils/router"
 
 export const ProductDetail = ({ params }) => {
-    // const { id } = params;
+    const { id } = params;
     console.log(params);
     return `
     <header class = "mb-3">
@@ -21,7 +21,7 @@ export const ProductDetail = ({ params }) => {
                 </ul>
             </div>
             <div class = "col-9">
-           <h1>Chi tiết sản phẩm :  </h1>
+           <h1>Chi tiết sản phẩm : ${id} </h1>
             <button onclick="navigate(/san-pham)">Back</button>
             </div>
         </div>

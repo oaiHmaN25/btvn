@@ -7,9 +7,9 @@ export const  router = (routes, defaultComponent) => {
   const router = new Navigo('/', { hash: true });
 
   routes.forEach((route) => {
-    router.on(route.path, () => {
+    router.on(route.path, ({ data }) => {
       const component = route.component || defaultComponent;
-      document.getElementById('root').innerHTML = component();
+      document.getElementById('root').innerHTML = component(data);
     });
   });
   router.notFound(() => {
