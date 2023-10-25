@@ -7,7 +7,7 @@ import { Default } from "./Layouts/Default"
 
 
 
-export default function App() {
+export const  App = () => {
     return router(
         [
             {

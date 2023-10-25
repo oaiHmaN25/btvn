@@ -1,20 +1,21 @@
-import Navigo from 'navigo';
-// import Home from './Pages/Home';
-// import About from './Pages/About';
-// import Products from './Pages/Products';
-// import ProductDetail from './Pages/ProductDetail';
-// import Default from './Layouts/Default';
 
-export default function router(routes, defaultComponent) {
+import Navigo from "navigo";
+// import { Default } from "../Layouts/Default";
+import { Error } from "../Error";
+
+export const  router = (routes, defaultComponent) => {
   const router = new Navigo('/', { hash: true });
 
   routes.forEach((route) => {
     router.on(route.path, () => {
       const component = route.component || defaultComponent;
-      document.getElementById('#root').innerHTML = component();
+      document.getElementById('root').innerHTML = component();
     });
   });
-
+  router.notFound(() => {
+    
+    document.getElementById('root').innerHTML = Error();
+  });
   router.resolve();
 
   return router;

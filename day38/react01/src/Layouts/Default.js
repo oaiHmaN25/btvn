@@ -10,7 +10,7 @@ export const  Default = () => {
         <h1><a href = "/" data-router>Header</a></h1>
     </div>
   </header>
-  <main>
+  <main id="main">
     <div class = "container">
         <div class = "row">
             <div class = "col-3">
