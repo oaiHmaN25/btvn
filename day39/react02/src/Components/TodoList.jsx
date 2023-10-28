@@ -5,7 +5,7 @@ export default class TodoList extends Component {
   constructor(props) {
     super(props);
     // this.state = data.listTodo
-    this.state = { taskName: "", tasks: [], editTaskIndex: -1 };
+    this.state = { taskName: "", tasks: [], checkbox:false, editTaskIndex: -1 };
 
     console.log(props);
   }
@@ -29,7 +29,7 @@ export default class TodoList extends Component {
     //   console.log(dataBlog);
     //   showErrorPopup(`${tokens.message}`);
     // }
-    this.setState({ tasks: data.data });
+    this.setState({ tasks: data.data.listTodo });
     console.log(this.state);
     console.log(data.data);
     console.log(this.state.tasks);
@@ -41,26 +41,22 @@ export default class TodoList extends Component {
     this.setState({ taskName: e.target.value });
   };
 
-  addTask = () => {
-    if (this.state.editTaskIndex !== -1) {
-      const updatedTasks = [...this.state.tasks];
-      updatedTasks[this.state.editTaskIndex] = this.state.taskName;
-      this.setState({
-        tasks: updatedTasks,
-        taskName: "",
-        completed: false,
-        editTaskIndex: -1,
-      });
+  async addTask(todo) {
+    const apiKey = localStorage.getItem("apiKey");
+    // const createdAt = new Date();
+    // todo = 
+    console.log(this.state);
+    const { data } = await client.post("/todos", { todo }, apiKey);
+    console.log(data);
+    console.log(data.data);
+    if (data.status_code === "SUCCESS") {
+      this.setState({ tasks: [data.data, ...this.state.tasks] });
     } else {
-      this.setState({
-        tasks: [...this.state.tasks, this.state.taskName],
-        completed: false,
-        taskName: "",
-      });
+      console.log(`ok`);
     }
-  };
+  }
 
-  editTask = (index) => {
+   editTask (id,index) {
     if (index === this.state.editTaskIndex) {
       // Clicking "Sửa" again in edit mode, exit edit mode.
       this.setState({ editTaskIndex: -1, taskName: "" });
@@ -68,20 +64,59 @@ export default class TodoList extends Component {
       // Clicking "Sửa" to enter edit mode.
       this.setState({
         editTaskIndex: index,
-        taskName: this.state.tasks[index],
+        taskName: this.state.tasks[index].todo,
       });
+      
     }
-  };
+  }
+  
+  async editTask2(id,checkbox,todo) {
+    const apiKey = localStorage.getItem("apiKey");
+    console.log(id);
+    const { data } = await client.patch(`/todos/${id}`,{todo,isCompleted:checkbox} ,apiKey);
+    console.log(data);
+    if (data.status_code === "SUCCESS") {
+      const { data:token } = await client.get(`/todos/${id}`, apiKey);
+      const updatedTasks = this.state.tasks.map((todo) =>
+        todo._id === id ? token.data : todo
+      );
+      console.log(this, this.state);
+      
+      this.setState({
+        tasks: updatedTasks,
+        editTaskIndex: null,
+        taskName: "",
+        checkbox:null,
+      });
+      // this.setState({
+      //   editTaskIndex: index,
+      //   taskName: this.state.tasks[index].todo,
+      // });
+      
+    }
+  }
 
-  deleteTask = (index) => {
-    const updatedTasks = this.state.tasks.filter((_, i) => i !== index);
-    this.setState({ tasks: updatedTasks, editTaskIndex: -1, taskName: "" });
-  };
-  completeTask = (index) => {
-    console.log(`ok`);
-    const updatedTasks = [...this.state.tasks];
-    updatedTasks[index].completed = !updatedTasks[index].completed;
-    this.setState({ tasks: updatedTasks });
+
+  async deleteTask(id) {
+    const apiKey = localStorage.getItem("apiKey");
+    console.log(id);
+    const { data } = await client.delete(`/todos/${id}`, apiKey)
+    if (data.status_code === "SUCCESS") {
+      console.log(`ok`);
+      const updatedTasks = this.state.tasks.filter((todo) => todo._id !== id);
+      this.setState({ tasks: updatedTasks, editTaskIndex: -1, taskName: "" });
+    } else {
+      console.log("false");
+    }
+    
+  }
+  completeTask = (e) => {
+    console.log(e.target.checked);
+    this.setState({checkbox: e.target.checked})
+    // console.log(`ok`);
+    // const updatedTasks = [...this.state.tasks];
+    // updatedTasks[index].completed = !updatedTasks[index].completed;
+    // this.setState({ tasks: updatedTasks });
   };
   checkGmail = () => {};
   render() {
@@ -95,7 +130,12 @@ export default class TodoList extends Component {
             onChange={this.myTaskChangeHandler}
             value={this.state.taskName}
           />
-          <button className="add-button" onClick={this.addTask}>
+          <button
+            className="add-button"
+            onClick={() => {
+              this.addTask(this.state.taskName);
+            }}
+          >
             {this.state.editTaskIndex === -1 ? "Thêm mới" : "Lưu"}
           </button>
         </div>
@@ -113,7 +153,7 @@ export default class TodoList extends Component {
                     value={this.state.taskName}
                   />
                 ) : (
-                  value
+                  value.todo
                 )}
                 <div className="button">
                   {index === this.state.editTaskIndex ? (
@@ -123,29 +163,46 @@ export default class TodoList extends Component {
                           htmlFor="completed"
                           style={{ fontSize: "20px", marginRight: "10px" }}
                         >
-                          {/* {tasks.completed ? "Completed" : "Not Completed"} */}
+                          {value.isCompleted ? "Completed" : "Not Completed"}
                         </label>
                         <input
                           type="checkbox"
                           id="completed"
-                          onClick={() => {
-                            this.completeTask(index);
+                          
+                          // { textDe}
+                          checked={
+                            this.state.checkbox !== null
+                              ? this.state.checkbox
+                              : value.isCompleted
+                          }
+                          onChange={(e) => {
+                            this.completeTask(e, value._id, index);
                           }}
                         />
                       </div>
                       <div className="cancel">
                         <button
                           className="editBtn"
-                          onClick={() => this.editTask(index)}
+                          onClick={() => this.editTask(value._id, index)}
                         >
                           Thoát
                         </button>
-                        <button className="updateBtn" onClick={this.addTask}>
+                        <button
+                          className="updateBtn"
+                          onClick={() =>
+                            this.editTask2(
+                              value._id,
+                              this.state.checkbox,
+                              this.state.taskName,
+                              index
+                            )
+                          }
+                        >
                           Lưu
                         </button>
                         <button
                           className="deleteBtn"
-                          onClick={() => this.deleteTask(index)}
+                          onClick={() => this.deleteTask(value._id)}
                         >
                           Xóa
                         </button>
@@ -155,13 +212,13 @@ export default class TodoList extends Component {
                     <div className="actions">
                       <button
                         className="editBtn"
-                        onClick={() => this.editTask(index)}
+                        onClick={() => this.editTask(value._id, index)}
                       >
                         Sửa
                       </button>
                       <button
                         className="deleteBtn"
-                        onClick={() => this.deleteTask(index)}
+                        onClick={() => this.deleteTask(value._id)}
                       >
                         Xóa
                       </button>
