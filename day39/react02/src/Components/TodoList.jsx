@@ -1,6 +1,8 @@
 import  { Component } from 'react'
 import "../assets/Style.css";
 import { client } from "../assets/Js/Client"
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default class TodoList extends Component {
   constructor(props) {
     super(props);
@@ -47,13 +49,23 @@ export default class TodoList extends Component {
     // todo = 
     console.log(this.state);
     const { data } = await client.post("/todos", { todo }, apiKey);
-    console.log(data);
-    console.log(data.data);
-    if (data.status_code === "SUCCESS") {
-      this.setState({ tasks: [data.data, ...this.state.tasks] });
+    console.log(todo);
+    if (todo.length === 1) {
+      // console.log(`ok`);
+      toast("Nhiều hơn 1 kí tự");
+      
     } else {
-      console.log(`ok`);
+       console.log(data);
+       console.log(data.data);
+       if (data.status_code === "SUCCESS") {
+         toast(data.message);
+         this.setState({ tasks: [data.data, ...this.state.tasks] });
+       } else {
+         console.log(`ok`);
+         toast(data.message);
+       }
     }
+   
   }
 
    editTask (id,index) {
@@ -80,6 +92,7 @@ export default class TodoList extends Component {
       const updatedTasks = this.state.tasks.map((todo) =>
         todo._id === id ? token.data : todo
       );
+      toast(data.message);
       console.log(this, this.state);
       
       this.setState({
@@ -93,6 +106,8 @@ export default class TodoList extends Component {
       //   taskName: this.state.tasks[index].todo,
       // });
       
+    } else {
+      toast(data.message);
     }
   }
 
@@ -103,9 +118,11 @@ export default class TodoList extends Component {
     const { data } = await client.delete(`/todos/${id}`, apiKey)
     if (data.status_code === "SUCCESS") {
       console.log(`ok`);
+      toast(data.message);
       const updatedTasks = this.state.tasks.filter((todo) => todo._id !== id);
       this.setState({ tasks: updatedTasks, editTaskIndex: -1, taskName: "" });
     } else {
+      toast(data.message);
       console.log("false");
     }
     

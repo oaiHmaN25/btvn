@@ -6,13 +6,19 @@ import TodoList from "./Components/TodoList";
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import Render from "./Components/Render";
 // import Default from "./Components/Default";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   
   checkgmail();
   
-  return <TodoList />;
+  return (
+    <>
+      <TodoList />
+      <ToastContainer />
+    </>
+  );
 }
 
 export default App
