@@ -3,22 +3,43 @@ import "../assets/Style.css";
 import { client } from "../assets/Js/Client"
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SearchTodo from './SearchTodo';
+// import Hook from './Hook';
 export default class TodoList extends Component {
   constructor(props) {
     super(props);
     // this.state = data.listTodo
-    this.state = { taskName: "", tasks: [], checkbox:false, editTaskIndex: -1 };
-
-    console.log(props);
+    this.state = {
+      taskName: "",
+      tasks: [],
+      checkbox: false,
+      editTaskIndex: -1,
+      debounceValue : "",
+    };
+    
+    // console.log(props);
   }
+  // debounce(value,delay) {
+
+  // }
   componentDidMount() {
     this.getTask();
-    
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.taskName !== this.state.taskName) {
+      // console.log(`ok`);
+      const updateValue = setTimeout(() => {
+        this.setState({ debounceValue : this.state.taskName} ) ;
+
+        
+      }, 500);
+      // clearTimeout(updateValue);
+    }
   }
 
   async getTask() {
     const apiKey = localStorage.getItem("apiKey");
-    const {  data } = await client.get(`/todos`, apiKey);
+    const { data } = await client.get(`/todos`, apiKey);
 
     // if (data.code === 200) {
     //   console.log(`ok`);
@@ -46,29 +67,27 @@ export default class TodoList extends Component {
   async addTask(todo) {
     const apiKey = localStorage.getItem("apiKey");
     // const createdAt = new Date();
-    // todo = 
+    // todo =
     console.log(this.state);
     const { data } = await client.post("/todos", { todo }, apiKey);
     console.log(todo);
     if (todo.length === 1) {
       // console.log(`ok`);
       toast("Nhiều hơn 1 kí tự");
-      
     } else {
-       console.log(data);
-       console.log(data.data);
-       if (data.status_code === "SUCCESS") {
-         toast(data.message);
-         this.setState({ tasks: [data.data, ...this.state.tasks] });
-       } else {
-         console.log(`ok`);
-         toast(data.message);
-       }
+      console.log(data);
+      console.log(data.data);
+      if (data.status_code === "SUCCESS") {
+        toast(data.message);
+        this.setState({ tasks: [data.data, ...this.state.tasks] });
+      } else {
+        console.log(`ok`);
+        toast(data.message);
+      }
     }
-   
   }
 
-   editTask (id,index) {
+  editTask(id, index) {
     if (index === this.state.editTaskIndex) {
       // Clicking "Sửa" again in edit mode, exit edit mode.
       this.setState({ editTaskIndex: -1, taskName: "" });
@@ -78,44 +97,45 @@ export default class TodoList extends Component {
         editTaskIndex: index,
         taskName: this.state.tasks[index].todo,
       });
-      
     }
   }
-  
-  async editTask2(id,checkbox,todo) {
+
+  async editTask2(id, checkbox, todo) {
     const apiKey = localStorage.getItem("apiKey");
     console.log(id);
-    const { data } = await client.patch(`/todos/${id}`,{todo,isCompleted:checkbox} ,apiKey);
+    const { data } = await client.patch(
+      `/todos/${id}`,
+      { todo, isCompleted: checkbox },
+      apiKey
+    );
     console.log(data);
     if (data.status_code === "SUCCESS") {
-      const { data:token } = await client.get(`/todos/${id}`, apiKey);
+      const { data: token } = await client.get(`/todos/${id}`, apiKey);
       const updatedTasks = this.state.tasks.map((todo) =>
         todo._id === id ? token.data : todo
       );
       toast(data.message);
       console.log(this, this.state);
-      
+
       this.setState({
         tasks: updatedTasks,
         editTaskIndex: null,
         taskName: "",
-        checkbox:null,
+        checkbox: null,
       });
       // this.setState({
       //   editTaskIndex: index,
       //   taskName: this.state.tasks[index].todo,
       // });
-      
     } else {
       toast(data.message);
     }
   }
 
-
   async deleteTask(id) {
     const apiKey = localStorage.getItem("apiKey");
     console.log(id);
-    const { data } = await client.delete(`/todos/${id}`, apiKey)
+    const { data } = await client.delete(`/todos/${id}`, apiKey);
     if (data.status_code === "SUCCESS") {
       console.log(`ok`);
       toast(data.message);
@@ -125,17 +145,19 @@ export default class TodoList extends Component {
       toast(data.message);
       console.log("false");
     }
-    
   }
   completeTask = (e) => {
     console.log(e.target.checked);
-    this.setState({checkbox: e.target.checked})
+    this.setState({ checkbox: e.target.checked });
     // console.log(`ok`);
     // const updatedTasks = [...this.state.tasks];
     // updatedTasks[index].completed = !updatedTasks[index].completed;
     // this.setState({ tasks: updatedTasks });
   };
   checkGmail = () => {};
+  handleSearchTodo = (listTodo) => {
+    this.setState({ tasks: listTodo });
+  };
   render() {
     return (
       <div className="container">
@@ -153,8 +175,12 @@ export default class TodoList extends Component {
               this.addTask(this.state.taskName);
             }}
           >
-            {this.state.editTaskIndex === -1 ? "Thêm mới" : "Lưu"}
+            {this.state.editTaskIndex === -1 ? "Thêm " : "Lưu"}
           </button>
+          <SearchTodo
+            searchValue={this.handleSearchTodo}
+            taskName={this.state.debounceValue}
+          />
         </div>
 
         <ul>
@@ -185,7 +211,6 @@ export default class TodoList extends Component {
                         <input
                           type="checkbox"
                           id="completed"
-                          
                           // { textDe}
                           checked={
                             this.state.checkbox !== null
