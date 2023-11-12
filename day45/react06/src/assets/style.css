@@ -1,0 +1,84 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#light {
+    background-color: white;
+}
+#dark  {
+    background-color: #1A202C;
+}
+.switch {
+  display: flex;
+  width: 100vw;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch label {
+  margin: 10px;
+}
+
+#light .switch label {
+  color: black;
+}
+
+#dark label {
+  color: white;
+}
+.App {
+    width: 100%;
+    height: 100vh;
+}
+h1{
+  color: #319795;
+  font-size: 60px;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+p{
+  font-size: 30px;
+  color: #2C7A7B;
+  margin: 20px;
+
+}
+
+#dark input{
+  border: none;
+  background-color: #1A202C;
+  border: 1px solid #51555E;
+  width: 95%;
+  margin:20px;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 20px;
+  color: white;
+}
+#light input{
+  width: 95%;
+  margin:20px;
+   border-radius: 10px;
+  padding: 20px;
+  font-size: 20px;
+}
+button{
+  padding: 10px 15px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+
+}
+
+#dark ul li {
+  color: white;
+  font-size: 20px;
+  margin: 10px;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+ul {
+  text-decoration: none;
+}
