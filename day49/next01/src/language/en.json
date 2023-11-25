@@ -1,0 +1,14 @@
+{
+    "home": {
+        "name" : "Do Hoai Nam",
+        "contact" : "Social Contact",
+        "project" : "Self project",
+        "title-project" : "Project Code snippet",
+        "day-project": "Project in 1 day",
+        "skill-title" : "My skills",
+        "skill-work" : "Web developer: REST API, React.js, Next.js, Redux, Context, CSS3, HTML5, UI/UX, Figma, Photoshop...",
+        "skill-other" : "Other skills: Relatively good research and search skills. Working thinking, good teamwork skills compared to age.",
+        "history" : "Histories",
+        "history-part" : "2016: One of junior high school"
+    }
+}

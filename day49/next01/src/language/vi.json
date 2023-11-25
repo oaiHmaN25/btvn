@@ -1,0 +1,14 @@
+{
+    "home": {
+        "name" : "Đỗ Hoài Nam",
+        "contact" : "Thông tin liên hệ",
+        "project" : "Các dự án cá nhân",
+        "title-project" : "Project Code snippet",
+        "day-project": "Một dự án nhỏ hoàn thành trong vòng một ngày",
+        "skill-title" : "Các kỹ năng của tôi",
+        "skill-work" : "Kỹ năng làm việc: REST API, React.js, Next.js, Redux, Context, CSS3, HTML5, UI/UX, Figma, Photoshop...",
+        "skill-other" : "Các kỹ năng khác: Kỹ năng nghiên cứu và tìm kiếm tương đối tốt. Tư duy làm việc, kỹ năng làm việc nhóm tốt so với độ tuổi.",
+        "history" : "Lịch sử",
+        "history-part" : "2016: Trường Trung học Cơ sở nào đó"
+    }
+}
